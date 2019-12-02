@@ -17,8 +17,11 @@ namespace Blauhaus.DeviceServices.DeviceInfo
                     await Xamarin.Essentials.SecureStorage.SetAsync("DeviceUniqueIdentifier", DeviceUniqueIdentifier);
                 }
             });
+
+            AppDataFolder = Xamarin.Essentials.FileSystem.AppDataDirectory;
         }
 
         public string DeviceUniqueIdentifier { get; private set; }
+        public string AppDataFolder { get; }
     }
 }

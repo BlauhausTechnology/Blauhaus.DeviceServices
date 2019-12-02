@@ -4,5 +4,6 @@
     {
 
         string DeviceUniqueIdentifier { get; }
+        string AppDataFolder { get; }
     }
 }
