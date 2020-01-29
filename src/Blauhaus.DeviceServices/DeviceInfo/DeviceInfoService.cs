@@ -19,8 +19,7 @@ namespace Blauhaus.DeviceServices.DeviceInfo
             {
                 if (_deviceId == null)
                 {
-                    _deviceId = Task.Run(() => Xamarin.Essentials.SecureStorage.GetAsync("DeviceUniqueIdentifier")).Result;
-
+                    _deviceId = Task.Run(() => Xamarin.Essentials.SecureStorage.GetAsync("DeviceUniqueIdentifier")).GetAwaiter().GetResult();
                     if (string.IsNullOrEmpty(_deviceId))
                     {
                         _deviceId = Guid.NewGuid().ToString();
