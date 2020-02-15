@@ -7,8 +7,4 @@
     <Description>Simple device functions wrapped around Xamarin.Essentials</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
-  </ItemGroup>
-
 </Project>
