@@ -7,4 +7,8 @@
     <Description>Simple device functions wrapped around Xamarin.Essentials</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="0.9.4" />
+  </ItemGroup>
+
 </Project>
