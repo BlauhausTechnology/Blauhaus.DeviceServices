@@ -2,7 +2,7 @@
 using Windows.System.Profile;
 using Blauhaus.DeviceServices.Common.DeviceInfo;
 
-namespace Blauhaus.DeviceServices.Platforms.UWP
+namespace Blauhaus.DeviceServices.UWP
 {
     public class UwpDeviceInfoService : BaseDeviceInfoService
     {

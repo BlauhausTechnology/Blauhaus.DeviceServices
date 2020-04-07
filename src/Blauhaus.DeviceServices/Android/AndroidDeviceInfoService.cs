@@ -6,9 +6,7 @@ namespace Blauhaus.DeviceServices.Android
 {
     public class AndroidDeviceInfoService : BaseDeviceInfoService
     {
-        public string DeviceUniqueIdentifier
-        {
-            get { return Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId); }
-        }
+        public override string DeviceUniqueIdentifier => 
+            Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
     }
 }

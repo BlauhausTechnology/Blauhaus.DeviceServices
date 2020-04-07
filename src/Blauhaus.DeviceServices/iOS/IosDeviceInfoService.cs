@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using Blauhaus.DeviceServices.Common.DeviceInfo;
 using Security;
-using Foundation;
+using UIKit;
 
-namespace Blauhaus.DeviceServices.Platforms.iOS
+namespace Blauhaus.DeviceServices.iOS
 {
     public class IosDeviceInfoService : BaseDeviceInfoService
     {
@@ -15,32 +15,14 @@ namespace Blauhaus.DeviceServices.Platforms.iOS
             {
                 if (_deviceId == null)
                 {
-                    var idRecord = new SecRecord(SecKind.GenericPassword) {Generic = NSData.FromString("deviceId")};
-                    var matchingIdRecord = SecKeyChain.QueryAsRecord(idRecord, out  var idResult);
-                    if (idResult == SecStatusCode.Success)
+                    _deviceId = Task.Run(() => Xamarin.Essentials.SecureStorage.GetAsync(DeviceKey)).GetAwaiter().GetResult();
+                    if (string.IsNullOrEmpty(_deviceId))
                     {
-                        _deviceId = matchingIdRecord.ValueData.ToString();
-                    }
-                    else
-                    {
-                        
                         Xamarin.Essentials.SecureStorage.DefaultAccessible = SecAccessible.AlwaysThisDeviceOnly;
-
-                        _deviceId = Guid.NewGuid().ToString();
-
-                        var newIdRecord = new SecRecord(SecKind.GenericPassword)
-                        {
-                            ValueData = NSData.FromString(_deviceId),
-                            Synchronizable = false,
-                            Generic = NSData.FromString("deviceId")
-                        };
-
-                        var saveResponse = SecKeyChain.Add(newIdRecord);
-
-                        if (saveResponse != SecStatusCode.Success && saveResponse != SecStatusCode.DuplicateItem)
-                        {
-                            _deviceId = UIKit.UIDevice.CurrentDevice.IdentifierForVendor.AsString();
-                        }
+                        
+                        _deviceId = UIDevice.CurrentDevice.IdentifierForVendor.AsString();
+                        
+                        Xamarin.Essentials.SecureStorage.SetAsync(DeviceKey, DeviceUniqueIdentifier);
                     }
                 }
                 return _deviceId;
