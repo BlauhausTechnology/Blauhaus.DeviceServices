@@ -14,8 +14,6 @@ namespace Blauhaus.DeviceServices.Android._Ioc
         {
             iocService.RegisterInstance<IRuntimePlatform>(RuntimePlatform.Android);
             iocService.RegisterImplementation<IDeviceInfoService, AndroidDeviceInfoService>(IocLifetime.Singleton);
-            iocService.RegisterImplementation<IApplicationInfoService, ApplicationInfoService>();
-            iocService.RegisterImplementation<ISecureStorageService, SecureStorageService>();
             return iocService;
         }
     }

@@ -8,8 +8,6 @@ namespace Blauhaus.DeviceServices.iOS._Ioc
         {
             iocService.RegisterInstance<IRuntimePlatform>(RuntimePlatform.iOS);
             iocService.RegisterImplementation<IDeviceInfoService, IosDeviceInfoService>(IocLifetime.Singleton);
-            iocService.RegisterImplementation<IApplicationInfoService, ApplicationInfoService>();
-            iocService.RegisterImplementation<ISecureStorageService, SecureStorageService>();
             return iocService;
         }
     }

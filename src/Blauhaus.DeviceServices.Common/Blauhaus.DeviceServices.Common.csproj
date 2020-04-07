@@ -7,6 +7,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="_Ioc\IocServiceExtensions.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Blauhaus.Ioc.Abstractions" Version="0.6.4" />
@@ -17,6 +21,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blauhaus.DeviceServices.Abstractions\Blauhaus.DeviceServices.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="_Ioc\IocServiceExtensions.cs" />
   </ItemGroup>
 
 

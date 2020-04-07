@@ -14,9 +14,6 @@ namespace Blauhaus.DeviceServices.Android._Ioc
         {
             this.AddSingleton<IRuntimePlatform>(RuntimePlatform.Android);
             this.AddSingleton<IDeviceInfoService, AndroidDeviceInfoService>();
-            
-            this.AddTransient<IApplicationInfoService, ApplicationInfoService>();
-            this.AddTransient<ISecureStorageService, SecureStorageService>();
         }
     }
 }

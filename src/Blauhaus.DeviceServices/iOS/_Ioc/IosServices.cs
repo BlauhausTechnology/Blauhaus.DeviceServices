@@ -15,8 +15,6 @@ namespace Blauhaus.DeviceServices.iOS._Ioc
         {
             this.AddSingleton<IRuntimePlatform>(RuntimePlatform.iOS);
             this.AddSingleton<IDeviceInfoService, IosDeviceInfoService>();
-            this.AddTransient<IApplicationInfoService, ApplicationInfoService>();
-            this.AddTransient<ISecureStorageService, SecureStorageService>();
         }
     }
 }
