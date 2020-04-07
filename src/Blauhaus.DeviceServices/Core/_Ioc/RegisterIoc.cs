@@ -6,7 +6,7 @@ using Blauhaus.DeviceServices.Core.DeviceInfo;
 using Blauhaus.DeviceServices.Core.SecureStorage;
 using Blauhaus.Ioc.Abstractions;
 
-namespace Blauhaus.DeviceServices._Ioc
+namespace Blauhaus.DeviceServices.Core._Ioc
 {
     public static class RegisterIoc
     {
