@@ -4,9 +4,18 @@
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid9;uap10.0.17134</TargetFrameworks>
     <LangVersion>8</LangVersion>
     <Nullable>enable</Nullable>
-    <Description>Simple device functions wrapped around Xamarin.Essentials</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
+    <PackageId>Blauhaus.DeviceServices</PackageId>
+    <PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/BlauhausTechnology/Blauhaus.DeviceServices</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BlauhausTechnology/Blauhaus.DeviceServices</RepositoryUrl>
+    <PackageTags>xamarin, windows, ios, android, xamarin.forms</PackageTags>
+    <Title>Device Services</Title>
+    <Description>Miscellaneous Xamarin device services</Description>
+    <Copyright>Copyright 2020</Copyright>
+
   </PropertyGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
