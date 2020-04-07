@@ -30,7 +30,7 @@ steps:
     platform: 'x86'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
+    msbuildArgs: '/t:restore;build;pack /p:PackageVersion=$(Build.SourceBranchName) /p:PackageOutputPath=$(build.artifactstagingdirectory)/public  /p:AssemblyFileVersion=$(Build.SourceBranchName)'
 
 - task: CopyFiles@2
   inputs:
