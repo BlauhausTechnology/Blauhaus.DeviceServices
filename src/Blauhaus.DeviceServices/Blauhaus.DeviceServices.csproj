@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MsBuild.SDK.Extras/2.0.54">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid9;uap10.0.17134</TargetFrameworks>
     <LangVersion>8</LangVersion>
     <Nullable>enable</Nullable>
     <Description>Simple device functions wrapped around Xamarin.Essentials</Description>
