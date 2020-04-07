@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'src/Blauhaus.DeviceServices.Platforms.UWP/Blauhaus.DeviceServices.Platforms.UWP.cpsroj'
+  solution: 'src\Blauhaus.DeviceServices.Platforms.UWP\Blauhaus.DeviceServices.Platforms.UWP.cpsroj'
   buildPlatform: 'x86|x64|ARM'
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
