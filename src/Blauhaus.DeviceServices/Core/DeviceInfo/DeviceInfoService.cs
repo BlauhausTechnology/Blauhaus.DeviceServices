@@ -8,9 +8,10 @@ using DeviceType = Blauhaus.Common.ValueObjects.DeviceType.DeviceType;
 
 namespace Blauhaus.DeviceServices.Core.DeviceInfo
 {
-    public class DeviceInfoService : IDeviceInfoService
+    public partial class DeviceInfoService : IDeviceInfoService
     {
         private string? _deviceId;
+
 
         public DeviceInfoService()
         {
@@ -58,6 +59,8 @@ namespace Blauhaus.DeviceServices.Core.DeviceInfo
         public string OperatingSystemVersion { get; }
         public string Manufacturer { get; }
         public string Model { get; }
+        public string AppDataFolder { get; }
+
         public string DeviceUniqueIdentifier
         {
             get
@@ -74,6 +77,5 @@ namespace Blauhaus.DeviceServices.Core.DeviceInfo
                 return _deviceId;
             }
         }
-        public string AppDataFolder { get; }
     }
 }

@@ -7,7 +7,7 @@ using Blauhaus.DeviceServices.Core.SecureStorage;
 using Blauhaus.Ioc.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Blauhaus.DeviceServices._Ioc
+namespace Blauhaus.DeviceServices.Core._Ioc
 {
     public static class ServiceCollectionExtensions
     {
