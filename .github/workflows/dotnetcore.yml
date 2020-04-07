@@ -15,11 +15,12 @@ jobs:
       run: |
         npm install @actions/core --save
         node ./scripts/getversion.js
-    - name: Setup Xamarin
-      uses: maxim-lobanov/setup-xamarin@v1.1
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.101
+    - uses: warrenbuckley/Setup-MSBuild@v1
+    - name: build
+      shell: pwsh
+      run: |
+        dotnet tool install --global boots --version $env:boots_version
+        boots --stable XamarinAndroid
+        boots --stable XamariniOS
     - name: Build
       run: dotnet pack -p:PackageVersion=${VERSION_NAME} ./src/Blauhaus.DeviceServices.sln --configuration Release --output ./
