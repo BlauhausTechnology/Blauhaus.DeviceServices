@@ -15,6 +15,8 @@ jobs:
       run: |
         npm install @actions/core --save
         node ./scripts/getversion.js
+    - name: Setup Xamarin
+      uses: maxim-lobanov/setup-xamarin@v1.1
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
