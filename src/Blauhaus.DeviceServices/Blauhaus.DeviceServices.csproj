@@ -5,6 +5,7 @@
     <LangVersion>8</LangVersion>
     <Nullable>enable</Nullable>
     <Description>Simple device functions wrapped around Xamarin.Essentials</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

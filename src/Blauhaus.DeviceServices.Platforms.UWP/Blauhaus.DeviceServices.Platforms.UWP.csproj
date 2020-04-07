@@ -9,6 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Blauhaus.DeviceServices.Platforms.UWP</RootNamespace>
     <AssemblyName>Blauhaus.DeviceServices.Platforms.UWP</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
