@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MsBuild.SDK.Extras/2.0.54">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid9;uap10.0.17134</TargetFrameworks>
+    <TargetFrameworks>Xamarin.iOS10;MonoAndroid9;uap10.0.17134</TargetFrameworks>
     <LangVersion>8</LangVersion>
     <Nullable>enable</Nullable>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
@@ -18,23 +18,26 @@
 
   </PropertyGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
-    <Compile Remove="Platforms\UWP\**\*.cs" />
-    <Compile Remove="Android\iOS\**\*.cs" />
-    <Compile Remove="Platforms\iOS\**\*.cs" />
-    <Compile Include="Core\**\*.cs" />
-  </ItemGroup>
-
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
-    <Compile Include="Platforms\UWP\**\*.cs" />
+    <Compile Include="UWP\**\*.cs" />
+    <Compile Remove="Android\**\*.cs" />
+    <Compile Remove="iOS\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-    <Compile Include="Platforms\iOS\**\*.cs" />
+    <Compile Include="iOS\**\*.cs" />
+    <Compile Remove="UWP\**\*.cs" />
+    <Compile Remove="Android\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <Compile Include="Platforms\Android\**\*.cs" />
+    <Compile Include="Android\**\*.cs" />
+    <Compile Remove="UWP\**\*.cs" />
+    <Compile Remove="iOS\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="iOS\_Ioc\IocServiceExtensions.cs" />
   </ItemGroup>
 
 
@@ -42,11 +45,12 @@
     <PackageReference Include="Blauhaus.Ioc.Abstractions" Version="0.6.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.3" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blauhaus.DeviceServices.Abstractions\Blauhaus.DeviceServices.Abstractions.csproj" />
+    <ProjectReference Include="..\Blauhaus.DeviceServices.Common\Blauhaus.DeviceServices.Common.csproj" />
   </ItemGroup>
 
 </Project>
