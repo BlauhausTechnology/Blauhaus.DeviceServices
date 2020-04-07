@@ -22,7 +22,7 @@ jobs:
          boots --stable XamarinAndroid
          boots --stable XamariniOS
      - name: Build NuGet Packages
-       run: |
+       run: | 
          dotnet pack -p:PackageVersion=${VERSION_NAME} .\src\Blauhaus.DeviceServices.sln --configuration Release --output .\
          dotnet test .\src\Blauhaus.DeviceServices.sln
      - name: Deploy NuGet Packages
