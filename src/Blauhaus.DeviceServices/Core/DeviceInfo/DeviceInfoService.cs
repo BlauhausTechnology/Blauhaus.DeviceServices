@@ -8,9 +8,8 @@ using DeviceType = Blauhaus.Common.ValueObjects.DeviceType.DeviceType;
 
 namespace Blauhaus.DeviceServices.Core.DeviceInfo
 {
-    public class DeviceInfoService : IDeviceInfoService
+    public partial class DeviceInfoService : IDeviceInfoService
     {
-        private string? _deviceId;
 
         public DeviceInfoService()
         {
@@ -58,22 +57,6 @@ namespace Blauhaus.DeviceServices.Core.DeviceInfo
         public string OperatingSystemVersion { get; }
         public string Manufacturer { get; }
         public string Model { get; }
-        public string DeviceUniqueIdentifier
-        {
-            get
-            {
-                if (_deviceId == null)
-                {
-                    _deviceId = Task.Run(() => Xamarin.Essentials.SecureStorage.GetAsync("DeviceUniqueIdentifier")).GetAwaiter().GetResult();
-                    if (string.IsNullOrEmpty(_deviceId))
-                    {
-                        _deviceId = Guid.NewGuid().ToString();
-                        Xamarin.Essentials.SecureStorage.SetAsync("DeviceUniqueIdentifier", DeviceUniqueIdentifier);
-                    }
-                }
-                return _deviceId;
-            }
-        }
         public string AppDataFolder { get; }
     }
 }

@@ -19,6 +19,9 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+    <Compile Remove="Platforms\UWP\**\*.cs" />
+    <Compile Remove="Android\iOS\**\*.cs" />
+    <Compile Remove="Platforms\iOS\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
