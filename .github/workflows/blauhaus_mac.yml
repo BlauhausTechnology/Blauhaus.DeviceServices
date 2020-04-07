@@ -1,0 +1,25 @@
+name: Blauhaus Packages
+on:
+  push:
+    branches:
+    - release/*
+
+jobs:
+
+  build:
+     runs-on: macOS-latest
+     steps:
+     - uses: actions/checkout@v1
+     - name: Set Version
+       run: |
+        npm install @actions/core --save
+        node ./scripts/getversion.js
+     - uses: warrenbuckley/Setup-MSBuild@v1
+     - name: Build NuGet Packages
+       run: | 
+         dotnet pack -p:PackageVersion=${VERSION_NAME} ./src/Blauhaus.DeviceServices.sln --configuration Release_Mac --output ./
+         dotnet test ./src/Blauhaus.DeviceServices.sln
+     - name: Deploy NuGet Packages
+       run: |
+         dotnet nuget push /home/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.Platforms.Android.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+         dotnet nuget push /home/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.Platforms.iOS.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
