@@ -17,7 +17,7 @@ variables:
 
 steps:
 - powershell: Write-Host "This is a script that could use $(Build.SourceBranchName)"
-- powershell: Get-Location
+- powershell: Get-ChildItem
 
 - task: NuGetToolInstaller@1
 
