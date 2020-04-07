@@ -1,8 +1,7 @@
-﻿using Blauhaus.Common.ValueObjects.RuntimePlatforms;
-using Blauhaus.DeviceServices.Abstractions.Application;
+﻿using Blauhaus.DeviceServices.Abstractions.Application;
 using Xamarin.Essentials;
 
-namespace Blauhaus.DeviceServices.Application
+namespace Blauhaus.DeviceServices.Core.Application
 {
     public class ApplicationInfoService : IApplicationInfoService
     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Blauhaus.DeviceServices.Abstractions.SecureStorage;
 
-namespace Blauhaus.DeviceServices.SecureStorage
+namespace Blauhaus.DeviceServices.Core.SecureStorage
 {
     public class SecureStorageService : ISecureStorageService
     {

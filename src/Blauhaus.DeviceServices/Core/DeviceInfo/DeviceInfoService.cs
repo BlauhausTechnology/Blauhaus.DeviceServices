@@ -6,7 +6,7 @@ using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
 using Xamarin.Essentials;
 using DeviceType = Blauhaus.Common.ValueObjects.DeviceType.DeviceType;
 
-namespace Blauhaus.DeviceServices.DeviceInfo
+namespace Blauhaus.DeviceServices.Core.DeviceInfo
 {
     public class DeviceInfoService : IDeviceInfoService
     {
