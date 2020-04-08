@@ -1,4 +1,6 @@
-﻿using Blauhaus.Ioc.Abstractions;
+﻿using Blauhaus.Common.ValueObjects.RuntimePlatforms;
+using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
+using Blauhaus.Ioc.Abstractions;
 
 namespace Blauhaus.DeviceServices.iOS._Ioc
 {
