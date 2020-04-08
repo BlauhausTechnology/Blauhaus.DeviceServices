@@ -16,8 +16,7 @@ variables:
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
 steps:
-- powershell: Write-Host "This is a script that could use $(Build.SourceBranchName)"
-- powershell: Get-ChildItem
+- powershell: Write-Host "Branch Name $(Build.SourceBranchName)"
 
 - task: NuGetToolInstaller@1
 

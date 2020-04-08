@@ -17,6 +17,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Blauhaus.DeviceServices.Abstractions\Blauhaus.DeviceServices.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\Blauhaus.DeviceServices.Common\Blauhaus.DeviceServices.Common.csproj" />
   </ItemGroup>
 </Project>
