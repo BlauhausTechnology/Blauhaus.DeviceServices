@@ -1,4 +1,5 @@
-﻿using Blauhaus.DeviceServices.Abstractions.Application;
+﻿using Blauhaus.Common.ValueObjects.RuntimePlatforms;
+using Blauhaus.DeviceServices.Abstractions.Application;
 using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
 using Blauhaus.DeviceServices.Abstractions.SecureStorage;
 using Blauhaus.DeviceServices.Common.Application;
@@ -12,6 +13,7 @@ namespace Blauhaus.DeviceServices.Common._Ioc
     {
         public static IServiceCollection AddDeviceServices(this IServiceCollection services)
         {
+            services.AddSingleton<IRuntimePlatform>(RuntimePlatform.Unknown);
             services.AddSingleton<IDeviceInfoService, DeviceInfoService>();
             services.AddTransient<IApplicationInfoService, ApplicationInfoService>();
             services.AddTransient<ISecureStorageService, SecureStorageService>();
