@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Blauhaus.Common.ValueObjects.DeviceType;
+﻿using Blauhaus.Common.ValueObjects.DeviceType;
 using Blauhaus.Common.ValueObjects.RuntimePlatforms;
 
 namespace Blauhaus.DeviceServices.Abstractions.DeviceInfo
