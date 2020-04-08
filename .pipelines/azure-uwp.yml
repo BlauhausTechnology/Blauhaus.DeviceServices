@@ -15,6 +15,9 @@ variables:
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
+steps:
+- powershell: Write-Host "Branch Name $(Build.SourceBranchName)"
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
