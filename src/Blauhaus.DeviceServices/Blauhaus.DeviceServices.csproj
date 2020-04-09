@@ -8,7 +8,6 @@
     
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
     <PackageId>Blauhaus.DeviceServices</PackageId>
-    <PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/BlauhausTechnology/Blauhaus.DeviceServices</PackageProjectUrl>
     <RepositoryUrl>https://github.com/BlauhausTechnology/Blauhaus.DeviceServices</RepositoryUrl>
     <PackageTags>xamarin, windows, ios, android, xamarin.forms</PackageTags>
