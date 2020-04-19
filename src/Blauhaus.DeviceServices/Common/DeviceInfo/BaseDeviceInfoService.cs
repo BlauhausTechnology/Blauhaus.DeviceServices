@@ -32,7 +32,6 @@ namespace Blauhaus.DeviceServices.Common.DeviceInfo
                 Type = DeviceType.Unknown;
             }
 
-            Model = Xamarin.Essentials.DeviceInfo.Model;
             Manufacturer = Xamarin.Essentials.DeviceInfo.Manufacturer;
             OperatingSystemVersion = Xamarin.Essentials.DeviceInfo.VersionString;
 
@@ -58,7 +57,7 @@ namespace Blauhaus.DeviceServices.Common.DeviceInfo
         public IRuntimePlatform Platform { get; }
         public string OperatingSystemVersion { get; }
         public string Manufacturer { get; }
-        public string Model { get; }
+        public virtual string Model => Xamarin.Essentials.DeviceInfo.Model;
         public string AppDataFolder { get; }
 
         public virtual string DeviceUniqueIdentifier

@@ -7,6 +7,7 @@ namespace Blauhaus.DeviceServices.UWP
     public class UwpDeviceInfoService : BaseDeviceInfoService
     {
         private string? _deviceId;
+        private string _modelName;
 
         public override string DeviceUniqueIdentifier
         {
@@ -21,5 +22,20 @@ namespace Blauhaus.DeviceServices.UWP
                 return _deviceId;
             }
         }
+
+        
+        public override string Model
+        {
+            get
+            {
+                if (_modelName == null)
+                {
+                    _modelName = Xamarin.Essentials.DeviceInfo.Model;
+                }
+
+                return _modelName;
+            }
+        }
+    
     }
 }
