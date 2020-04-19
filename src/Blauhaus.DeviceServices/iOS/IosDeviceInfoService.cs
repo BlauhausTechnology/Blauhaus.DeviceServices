@@ -8,6 +8,7 @@ namespace Blauhaus.DeviceServices.iOS
     public class IosDeviceInfoService : BaseDeviceInfoService
     {
         private string? _deviceId;
+        private string? _modelName;
 
         public override string DeviceUniqueIdentifier
         {
@@ -26,6 +27,19 @@ namespace Blauhaus.DeviceServices.iOS
                     }
                 }
                 return _deviceId;
+            }
+        }
+
+        public override string Model
+        {
+            get
+            {
+                if (_modelName == null)
+                {
+                    _modelName = Xamarin.iOS.DeviceHardware.Model;
+                }
+
+                return _modelName;
             }
         }
     }
