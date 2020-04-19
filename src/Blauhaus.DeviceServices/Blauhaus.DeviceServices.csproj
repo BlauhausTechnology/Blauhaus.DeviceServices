@@ -8,7 +8,6 @@
     
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
     <PackageId>Blauhaus.DeviceServices</PackageId>
-    <PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/BlauhausTechnology/Blauhaus.DeviceServices</PackageProjectUrl>
     <RepositoryUrl>https://github.com/BlauhausTechnology/Blauhaus.DeviceServices</RepositoryUrl>
     <PackageTags>xamarin, windows, ios, android, xamarin.forms</PackageTags>
@@ -79,6 +78,18 @@
 
   <ItemGroup>
     <None Remove="Common\_Ioc\ServiceCollectionExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <PackageReference Include="dannycabrera.GetDroidModel">
+      <Version>1.4.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+    <PackageReference Include="dannycabrera.GetiOSModel">
+      <Version>1.14.0</Version>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
