@@ -12,7 +12,7 @@ namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
         {
             With(x => x.Type, DeviceType.Phone);
             With(x => x.Platform, RuntimePlatform.iOS);
-            With(x => x.AppDataFolder, "C:/Docs");
+            With(x => x.AppDataFolder, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
             With(x => x.DeviceUniqueIdentifier, Guid.NewGuid().ToString());
             With(x => x.Model, "Model T");
             With(x => x.OperatingSystemVersion, "2.0");
