@@ -60,7 +60,7 @@ namespace Blauhaus.DeviceServices.Common.DeviceInfo
         public virtual string Model => Xamarin.Essentials.DeviceInfo.Model;
         public string AppDataFolder { get; }
 
-        public virtual string DeviceUniqueIdentifier
+        public string DeviceUniqueIdentifier
         {
             get
             {
@@ -69,12 +69,14 @@ namespace Blauhaus.DeviceServices.Common.DeviceInfo
                     _deviceId = Task.Run(() => Xamarin.Essentials.SecureStorage.GetAsync(DeviceKey)).GetAwaiter().GetResult();
                     if (string.IsNullOrEmpty(_deviceId))
                     {
-                        _deviceId = Guid.NewGuid().ToString();
+                        _deviceId = GetPlatformDeviceId();
                         Xamarin.Essentials.SecureStorage.SetAsync(DeviceKey, DeviceUniqueIdentifier);
                     }
                 }
                 return _deviceId;
             }
         }
+
+        protected abstract string GetPlatformDeviceId();
     }
 }

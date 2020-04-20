@@ -8,10 +8,6 @@ namespace Blauhaus.DeviceServices.Android
     {
         private string _modelName;
 
-        public override string DeviceUniqueIdentifier => 
-            Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
-
-        
         public override string Model
         {
             get
@@ -27,6 +23,12 @@ namespace Blauhaus.DeviceServices.Android
                 return _modelName;
             }
         }
+
+        protected override string GetPlatformDeviceId()
+        {
+            return Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
+        }
+
     }
     
 }
