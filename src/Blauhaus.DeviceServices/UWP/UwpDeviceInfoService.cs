@@ -8,21 +8,13 @@ namespace Blauhaus.DeviceServices.UWP
     {
         private string? _deviceId;
         private string _modelName;
-
-        public override string DeviceUniqueIdentifier
+        
+        protected override string GetPlatformDeviceId()
         {
-            get
-            {
-                if (_deviceId == null)
-                {
-                    var systemId = SystemIdentification.GetSystemIdForPublisher();
-                    var dataReader = DataReader.FromBuffer(systemId.Id);
-                    _deviceId = dataReader.ReadGuid().ToString();
-                }
-                return _deviceId;
-            }
+            var systemId = SystemIdentification.GetSystemIdForPublisher();
+            var dataReader = DataReader.FromBuffer(systemId.Id);
+            return dataReader.ReadGuid().ToString();
         }
-
         
         public override string Model
         {
