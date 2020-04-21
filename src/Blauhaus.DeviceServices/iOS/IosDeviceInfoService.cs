@@ -10,24 +10,10 @@ namespace Blauhaus.DeviceServices.iOS
         private string? _deviceId;
         private string? _modelName;
 
-        public override string DeviceUniqueIdentifier
+        protected override string GetPlatformDeviceId()
         {
-            get
-            {
-                if (_deviceId == null)
-                {
-                    _deviceId = Task.Run(() => Xamarin.Essentials.SecureStorage.GetAsync(DeviceKey)).GetAwaiter().GetResult();
-                    if (string.IsNullOrEmpty(_deviceId))
-                    {
-                        Xamarin.Essentials.SecureStorage.DefaultAccessible = SecAccessible.AlwaysThisDeviceOnly;
-                        
-                        _deviceId = UIDevice.CurrentDevice.IdentifierForVendor.AsString();
-                        
-                        Xamarin.Essentials.SecureStorage.SetAsync(DeviceKey, DeviceUniqueIdentifier);
-                    }
-                }
-                return _deviceId;
-            }
+            Xamarin.Essentials.SecureStorage.DefaultAccessible = SecAccessible.AlwaysThisDeviceOnly;
+            return UIDevice.CurrentDevice.IdentifierForVendor.AsString();
         }
 
         public override string Model
