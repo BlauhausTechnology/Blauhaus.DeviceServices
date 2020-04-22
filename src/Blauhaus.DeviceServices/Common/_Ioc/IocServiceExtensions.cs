@@ -12,8 +12,6 @@ namespace Blauhaus.DeviceServices.Common._Ioc
     {
         public static IIocService AddDeviceServices(this IIocService iocService)
         {
-            iocService.RegisterInstance<IRuntimePlatform>(RuntimePlatform.Unknown);
-            iocService.RegisterImplementation<IDeviceInfoService, DeviceInfoService>(IocLifetime.Singleton);
             iocService.RegisterImplementation<IApplicationInfoService, ApplicationInfoService>();
             iocService.RegisterImplementation<ISecureStorageService, SecureStorageService>();
             return iocService;

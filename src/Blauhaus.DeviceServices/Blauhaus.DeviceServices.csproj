@@ -57,10 +57,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Common\DeviceInfo\DeviceInfoService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Common\Application\ApplicationInfoService.cs" />
   </ItemGroup>
 
@@ -71,7 +67,6 @@
   <ItemGroup>
     <Compile Include="Common\Application\ApplicationInfoService.cs" />
     <Compile Include="Common\DeviceInfo\BaseDeviceInfoService.cs" />
-    <Compile Include="Common\DeviceInfo\DeviceInfoService.cs" />
     <Compile Include="Common\SecureStorage\SecureStorageService.cs" />
     <Compile Include="Common\_Ioc\ServiceCollectionExtensions.cs" />
   </ItemGroup>
