@@ -13,8 +13,6 @@ namespace Blauhaus.DeviceServices.Common._Ioc
     {
         public static IServiceCollection AddDeviceServices(this IServiceCollection services)
         {
-            services.AddSingleton<IRuntimePlatform>(RuntimePlatform.Unknown);
-            services.AddSingleton<IDeviceInfoService, DeviceInfoService>();
             services.AddTransient<IApplicationInfoService, ApplicationInfoService>();
             services.AddTransient<ISecureStorageService, SecureStorageService>();
             return services;
