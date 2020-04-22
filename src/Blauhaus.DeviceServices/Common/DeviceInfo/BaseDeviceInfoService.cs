@@ -11,7 +11,7 @@ namespace Blauhaus.DeviceServices.Common.DeviceInfo
     public abstract class BaseDeviceInfoService : IDeviceInfoService
     {
         private string? _deviceId;
-        protected const string DeviceKey = "DeviceUniqueIdentifier";
+        protected const string DeviceKey = "DeviceUniqueId";
 
         protected BaseDeviceInfoService()
         {
