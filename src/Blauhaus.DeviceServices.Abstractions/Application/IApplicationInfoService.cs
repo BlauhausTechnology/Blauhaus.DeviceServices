@@ -1,4 +1,6 @@
-﻿namespace Blauhaus.DeviceServices.Abstractions.Application
+﻿using System.Threading.Tasks;
+
+namespace Blauhaus.DeviceServices.Abstractions.Application
 {
     public interface IApplicationInfoService
     {

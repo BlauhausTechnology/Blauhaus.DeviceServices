@@ -1,4 +1,5 @@
-﻿using Blauhaus.DeviceServices.Abstractions.Application;
+﻿using System.Threading.Tasks;
+using Blauhaus.DeviceServices.Abstractions.Application;
 using Xamarin.Essentials;
 
 namespace Blauhaus.DeviceServices.Common.Application
@@ -7,7 +8,6 @@ namespace Blauhaus.DeviceServices.Common.Application
     {
 
         public string CurrentVersion => VersionTracking.CurrentVersion;
-
-      
+       
     }
 }
