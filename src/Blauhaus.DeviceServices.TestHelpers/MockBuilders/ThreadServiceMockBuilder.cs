@@ -14,7 +14,7 @@ namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
                 .Callback((Action act) => act.Invoke());
             
             Mock.Setup(x => x.InvokeOnMainThreadAsync(It.IsAny<Func<Task>>()))
-                .Callback((Action act) => act.Invoke());
+                .Callback((Func<Task> act) => act.Invoke());
         }
 
         public ThreadServiceMockBuilder Setup<T>()
