@@ -70,6 +70,7 @@
     <Compile Include="Common\DeviceInfo\BaseDeviceInfoService.cs" />
     <Compile Include="Common\SecureStorage\SecureStorageService.cs" />
     <Compile Include="Common\_Ioc\ServiceCollectionExtensions.cs" />
+    <Compile Include="Common\_Ioc\IocServiceExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
