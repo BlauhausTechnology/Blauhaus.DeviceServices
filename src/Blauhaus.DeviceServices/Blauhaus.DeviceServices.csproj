@@ -65,10 +65,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Common\Thread\ThreadService.cs" />
     <Compile Include="Common\Application\ApplicationInfoService.cs" />
     <Compile Include="Common\DeviceInfo\BaseDeviceInfoService.cs" />
     <Compile Include="Common\SecureStorage\SecureStorageService.cs" />
     <Compile Include="Common\_Ioc\ServiceCollectionExtensions.cs" />
+    <Compile Include="Common\_Ioc\IocServiceExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
