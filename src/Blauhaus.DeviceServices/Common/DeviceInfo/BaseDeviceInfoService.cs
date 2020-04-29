@@ -70,7 +70,7 @@ namespace Blauhaus.DeviceServices.Common.DeviceInfo
                     if (string.IsNullOrEmpty(_deviceId))
                     {
                         _deviceId = GetPlatformDeviceId();
-                        Xamarin.Essentials.SecureStorage.SetAsync(DeviceKey, DeviceUniqueIdentifier);
+                        Xamarin.Essentials.SecureStorage.SetAsync(DeviceKey, _deviceId);
                     }
                 }
                 return _deviceId;
