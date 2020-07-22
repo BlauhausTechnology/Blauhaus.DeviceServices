@@ -16,7 +16,13 @@ namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
             With(x => x.CurrentConnection, new ConnectionState(ConnectionAccess.Internet, ConnectionType.Ethernet));
             Where_Connect_returns(new ConnectionState(ConnectionAccess.Internet, ConnectionType.Ethernet));
         }
+        
+        public ConnectivityServiceMockBuilder Where_Connect_returns(IDisposable disposable)
+        {
+            Mock.Setup(x => x.Connect()).Returns(Observable.Create<ConnectionState>(observer => disposable));
 
+            return this;
+        }
         public ConnectivityServiceMockBuilder Where_Connect_returns(IEnumerable<ConnectionState> values)
         {
             Mock.Setup(x => x.Connect()).Returns(Observable.Create<ConnectionState>(observer =>
