@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="1.5.1" />
+    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="1.5.3" />
   </ItemGroup>
 
 </Project>
