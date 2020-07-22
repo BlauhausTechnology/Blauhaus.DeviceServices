@@ -18,5 +18,11 @@ namespace Blauhaus.DeviceServices.Abstractions.Connectivity
 
         public IEnumerable<ConnectionType> Types { get; }
         public ConnectionAccess Access {get;}
+
+        public bool IsConnected => Access == ConnectionAccess.Internet;
+
+        public static ConnectionState Disconnected = new ConnectionState(ConnectionAccess.None, new List<ConnectionType>());
+        public static ConnectionState Wifi = new ConnectionState(ConnectionAccess.Internet, ConnectionType.WiFi);
+        public static ConnectionState Cellular = new ConnectionState(ConnectionAccess.Internet, ConnectionType.Cellular);
     }
 }
