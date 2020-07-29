@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blauhaus.Analytics.Abstractions.Extensions;
 using Blauhaus.Analytics.Abstractions.Service;
@@ -18,6 +19,18 @@ namespace Blauhaus.DeviceServices.Common.Permissions
             _analyticsService = analyticsService;
         }
 
+
+        public async Task<Result> EnsurePermissionGrantedAsync(DevicePermission permission)
+        {
+            var permissionAlreadyGranted = await CheckPermissionAsync(permission);
+            if (permissionAlreadyGranted.IsSuccess)
+            {
+                return Result.Success();
+            }
+
+            _analyticsService.TraceInformation(this, $"Requested {permission.ToString()} permission has not previously bee granted. Requesting...");
+            return await RequestPermissionAsync(permission);
+        }
 
         public Task<Result> CheckPermissionAsync(DevicePermission permission)
         {
