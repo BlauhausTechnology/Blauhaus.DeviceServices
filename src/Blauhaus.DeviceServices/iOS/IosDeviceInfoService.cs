@@ -7,12 +7,15 @@ namespace Blauhaus.DeviceServices.iOS
 {
     public class IosDeviceInfoService : BaseDeviceInfoService
     {
-        private string? _deviceId;
         private string? _modelName;
+
+        public IosDeviceInfoService()
+        {
+            Xamarin.Essentials.SecureStorage.DefaultAccessible = SecAccessible.AlwaysThisDeviceOnly;
+        }
 
         protected override string GetPlatformDeviceId()
         {
-            Xamarin.Essentials.SecureStorage.DefaultAccessible = SecAccessible.AlwaysThisDeviceOnly;
             return UIDevice.CurrentDevice.IdentifierForVendor.AsString();
         }
 

@@ -28,7 +28,7 @@ namespace Blauhaus.DeviceServices.Common.Permissions
                 return Result.Success();
             }
 
-            _analyticsService.TraceInformation(this, $"Requested {permission.ToString()} permission has not previously bee granted. Requesting...");
+            _analyticsService.TraceInformation(this, $"Requested {permission.ToString()} permission has not previously been granted. Requesting...");
             return await RequestPermissionAsync(permission);
         }
 
