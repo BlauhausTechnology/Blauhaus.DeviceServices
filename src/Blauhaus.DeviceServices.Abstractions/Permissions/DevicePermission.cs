@@ -1,0 +1,29 @@
+﻿namespace Blauhaus.DeviceServices.Abstractions.Permissions
+{
+    public enum DevicePermission
+    {
+        Battery,
+        CalendarRead,
+        CalendarWrite,
+        Camera,
+        ContactsRead,
+        ContactsWrite,
+        Flashlight,
+        LaunchApp,
+        LocationWhenInUse,
+        LocationAlways,
+        Maps,
+        Media,
+        Microphone,
+        NetworkState,
+        Phone,
+        Photos,
+        Reminders,
+        Sensors,
+        Sms,
+        Speech,
+        StorageRead,
+        StorageWrite,
+        Vibrate,
+    }
+}

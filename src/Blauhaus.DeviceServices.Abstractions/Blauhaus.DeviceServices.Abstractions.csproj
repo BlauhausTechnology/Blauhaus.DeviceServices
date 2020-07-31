@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="1.5.1" />
+    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="1.5.3" />
+    <PackageReference Include="Blauhaus.Errors" Version="0.0.2" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.11.1" />
   </ItemGroup>
 
 </Project>
