@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blauhaus.Analytics.Abstractions.Extensions;
 using Blauhaus.Analytics.Abstractions.Service;
-using Blauhaus.Common.Results;
 using Blauhaus.DeviceServices.Abstractions.Permissions;
 using CSharpFunctionalExtensions;
 using Xamarin.Essentials; 
