@@ -5,20 +5,20 @@ using Moq;
 
 namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
 {
-    public class SecureStorageMockBuilder : BaseMockBuilder<SecureStorageMockBuilder, ISecureStorageService>
+    public class SecureStorageServiceMockBuilder : BaseMockBuilder<SecureStorageServiceMockBuilder, ISecureStorageService>
     {
-        public SecureStorageMockBuilder()
+        public SecureStorageServiceMockBuilder()
         {
             Where_GetAsync_returns(Guid.NewGuid().ToString());
         }
 
-        public SecureStorageMockBuilder Where_GetAsync_returns(string value)
+        public SecureStorageServiceMockBuilder Where_GetAsync_returns(string value)
         {
             Mock.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(value);
             return this;
         }
 
-        public SecureStorageMockBuilder Where_GetAsync_returns(string value, string key)
+        public SecureStorageServiceMockBuilder Where_GetAsync_returns(string value, string key)
         {
             Mock.Setup(x => x.GetAsync(key)).ReturnsAsync(value);
             return this;
