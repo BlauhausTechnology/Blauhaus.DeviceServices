@@ -18,7 +18,7 @@ namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
             return this;
         }
 
-        public SecureStorageServiceMockBuilder Where_GetAsync_returns(string value, string key)
+        public SecureStorageServiceMockBuilder Where_GetAsync_returns(string key, string value)
         {
             Mock.Setup(x => x.GetAsync(key)).ReturnsAsync(value);
             return this;

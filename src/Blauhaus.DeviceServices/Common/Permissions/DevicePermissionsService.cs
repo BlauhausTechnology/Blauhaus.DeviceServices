@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Blauhaus.Analytics.Abstractions.Extensions;
 using Blauhaus.Analytics.Abstractions.Service;
 using Blauhaus.DeviceServices.Abstractions.Permissions;
+using Blauhaus.DeviceServices.Abstractions.Thread;
 using CSharpFunctionalExtensions;
 using Xamarin.Essentials; 
 
@@ -11,10 +12,14 @@ namespace Blauhaus.DeviceServices.Common.Permissions
     public class DevicePermissionsService : IDevicePermissionsService
     {
         private readonly IAnalyticsService _analyticsService;
+        private readonly IThreadService _threadService;
 
-        public DevicePermissionsService(IAnalyticsService analyticsService)
+        public DevicePermissionsService(
+            IAnalyticsService analyticsService,
+            IThreadService threadService)
         {
             _analyticsService = analyticsService;
+            _threadService = threadService;
         }
 
 
@@ -26,7 +31,7 @@ namespace Blauhaus.DeviceServices.Common.Permissions
                 return Result.Success();
             }
 
-            _analyticsService.TraceInformation(this, $"Requested {permission.ToString()} permission has not previously been granted. Requesting...");
+            _analyticsService.TraceInformation(this, $"Requested {permission} permission has not previously been granted. Requesting...");
             return await RequestPermissionAsync(permission);
         }
 
@@ -94,55 +99,60 @@ namespace Blauhaus.DeviceServices.Common.Permissions
 
         private async Task<Result> RequestPermissionStatusAsync<T>() where T : Xamarin.Essentials.Permissions.BasePermission, new()
         {
-            try
+            return await _threadService.InvokeOnMainThreadAsync(async () =>
             {
-                var permissionStatus = await Xamarin.Essentials.Permissions.RequestAsync<T>();
-
-                if (permissionStatus == PermissionStatus.Granted)
+                try
                 {
-                    _analyticsService.TraceInformation(this, $"Permission granted for {typeof(T).Name}");
-                    return Result.Success();
+                    var permissionStatus = await Xamarin.Essentials.Permissions.RequestAsync<T>();
+
+                    if (permissionStatus == PermissionStatus.Granted)
+                    {
+                        _analyticsService.TraceInformation(this, $"Permission granted for {typeof(T).Name}");
+                        return Result.Success();
+                    }
+
+                    return permissionStatus switch
+                    {
+                        PermissionStatus.Denied => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Denied(typeof(T).Name)),
+                        PermissionStatus.Disabled => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Disabled(typeof(T).Name)),
+                        PermissionStatus.Restricted => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Restricted(typeof(T).Name)),
+                        _ => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Unknown(typeof(T).Name))
+                    };
                 }
-
-                return permissionStatus switch
+                catch (Exception e)
                 {
-                    PermissionStatus.Denied => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Denied(typeof(T).Name)),
-                    PermissionStatus.Disabled => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Disabled(typeof(T).Name)),
-                    PermissionStatus.Restricted => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Restricted(typeof(T).Name)),
-                    _ => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Unknown(typeof(T).Name))
-                };
-            }
-            catch (Exception e)
-            {
-                return _analyticsService.LogExceptionResult(this, e, DevicePermissionErrors.Exception(typeof(T).Name, e.Message));
-            }
- 
+                    return _analyticsService.LogExceptionResult(this, e, DevicePermissionErrors.Exception(typeof(T).Name, e.Message));
+                }
+            });
+
         }
 
         private async Task<Result> CheckPermissionStatusAsync<T>() where T : Xamarin.Essentials.Permissions.BasePermission, new()
         {
-            try
+            return await _threadService.InvokeOnMainThreadAsync(async () =>
             {
-                var permissionStatus = await Xamarin.Essentials.Permissions.CheckStatusAsync<T>();
-                if (permissionStatus == PermissionStatus.Granted)
+                try
                 {
-                    _analyticsService.TraceVerbose(this, $"Permission has already been granted for {typeof(T).Name}");
-                    return Result.Success();
-                }
+                    var permissionStatus = await Xamarin.Essentials.Permissions.CheckStatusAsync<T>();
+                    if (permissionStatus == PermissionStatus.Granted)
+                    {
+                        _analyticsService.TraceVerbose(this, $"Permission has already been granted for {typeof(T).Name}");
+                        return Result.Success();
+                    }
 
-                return permissionStatus switch
-                { 
-                    PermissionStatus.Denied => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Denied(typeof(T).Name)),
-                    PermissionStatus.Disabled => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Disabled(typeof(T).Name)),
-                    PermissionStatus.Restricted => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Restricted(typeof(T).Name)),
-                    _ => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Unknown(typeof(T).Name))
-                };
-            }
-            catch (Exception e)
-            {
-                return _analyticsService.LogExceptionResult(this, e, DevicePermissionErrors.Exception(typeof(T).Name, e.Message));
-            }
- 
+                    return permissionStatus switch
+                    {
+                        PermissionStatus.Denied => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Denied(typeof(T).Name)),
+                        PermissionStatus.Disabled => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Disabled(typeof(T).Name)),
+                        PermissionStatus.Restricted => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Restricted(typeof(T).Name)),
+                        _ => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Unknown(typeof(T).Name))
+                    };
+                }
+                catch (Exception e)
+                {
+                    return _analyticsService.LogExceptionResult(this, e, DevicePermissionErrors.Exception(typeof(T).Name, e.Message));
+                }
+            });
         }
     }
 }
