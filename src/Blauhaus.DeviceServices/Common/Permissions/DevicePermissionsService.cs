@@ -113,15 +113,15 @@ namespace Blauhaus.DeviceServices.Common.Permissions
 
                     return permissionStatus switch
                     {
-                        PermissionStatus.Denied => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Denied(typeof(T).Name)),
-                        PermissionStatus.Disabled => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Disabled(typeof(T).Name)),
-                        PermissionStatus.Restricted => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Restricted(typeof(T).Name)),
-                        _ => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Unknown(typeof(T).Name))
+                        PermissionStatus.Denied => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.PermissionDenied(typeof(T).Name)),
+                        PermissionStatus.Disabled => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.PermissionDisabled(typeof(T).Name)),
+                        PermissionStatus.Restricted => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.PermissionRestricted(typeof(T).Name)),
+                        _ => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.PermissionUnknown(typeof(T).Name))
                     };
                 }
                 catch (Exception e)
                 {
-                    return _analyticsService.LogExceptionResult(this, e, DevicePermissionErrors.Exception(typeof(T).Name, e.Message));
+                    return _analyticsService.LogExceptionResult(this, e, DevicePermissionErrors.PermissionException(typeof(T).Name, e.Message));
                 }
             });
 
@@ -142,15 +142,15 @@ namespace Blauhaus.DeviceServices.Common.Permissions
 
                     return permissionStatus switch
                     {
-                        PermissionStatus.Denied => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Denied(typeof(T).Name)),
-                        PermissionStatus.Disabled => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Disabled(typeof(T).Name)),
-                        PermissionStatus.Restricted => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Restricted(typeof(T).Name)),
-                        _ => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.Unknown(typeof(T).Name))
+                        PermissionStatus.Denied => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.PermissionDenied(typeof(T).Name)),
+                        PermissionStatus.Disabled => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.PermissionDisabled(typeof(T).Name)),
+                        PermissionStatus.Restricted => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.PermissionRestricted(typeof(T).Name)),
+                        _ => _analyticsService.TraceErrorResult(this, DevicePermissionErrors.PermissionUnknown(typeof(T).Name))
                     };
                 }
                 catch (Exception e)
                 {
-                    return _analyticsService.LogExceptionResult(this, e, DevicePermissionErrors.Exception(typeof(T).Name, e.Message));
+                    return _analyticsService.LogExceptionResult(this, e, DevicePermissionErrors.PermissionException(typeof(T).Name, e.Message));
                 }
             });
         }

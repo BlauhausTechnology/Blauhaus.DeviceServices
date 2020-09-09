@@ -9,9 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blauhaus.Analytics.Abstractions" Version="1.0.8" />
+    <PackageReference Include="Blauhaus.Analytics.Abstractions" Version="1.0.9" />
     <PackageReference Include="Blauhaus.Common.ValueObjects" Version="1.7.8" />
-    <PackageReference Include="CSharpFunctionalExtensions" Version="2.11.6" />
   </ItemGroup>
 
 </Project>
