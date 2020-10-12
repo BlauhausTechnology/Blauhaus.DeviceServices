@@ -9,6 +9,15 @@ namespace Blauhaus.DeviceServices.Common.Thread
     public class ThreadService : IThreadService
     {
         public bool IsOnMainThread => MainThread.IsMainThread;
+        public void InvokeOnMainThread(Action action)
+        {
+            MainThread.BeginInvokeOnMainThread(action);
+        }
+
+        public void InvokeOnMainThread(Task task)
+        {
+            MainThread.BeginInvokeOnMainThread(async () => await task);
+        }
 
         public Task<T> InvokeOnMainThreadAsync<T>(Func<T> task)
         {

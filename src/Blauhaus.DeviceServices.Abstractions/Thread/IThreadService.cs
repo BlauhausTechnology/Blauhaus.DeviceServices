@@ -7,10 +7,15 @@ namespace Blauhaus.DeviceServices.Abstractions.Thread
     public interface IThreadService
     {
         bool IsOnMainThread { get; }
+
+        void InvokeOnMainThread(Action action);
+        void InvokeOnMainThread(Task task);
+
         Task<T> InvokeOnMainThreadAsync<T>(Func<T> task);
         Task InvokeOnMainThreadAsync(Action action);
         Task<T> InvokeOnMainThreadAsync<T>(Func<Task<T>> task);
         Task InvokeOnMainThreadAsync(Func<Task> task);
+        
         Task<SynchronizationContext> GetMainThreadSynchronizationContextAsync();
 
     }

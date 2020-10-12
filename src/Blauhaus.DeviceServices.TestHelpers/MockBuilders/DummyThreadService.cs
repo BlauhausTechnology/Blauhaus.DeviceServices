@@ -7,6 +7,16 @@ namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
 {
     public class DummyThreadService : IThreadService
     {
+        public void InvokeOnMainThread(Action action)
+        {
+            action.Invoke();
+        }
+
+        public void InvokeOnMainThread(Task task)
+        {
+            task.Wait();
+        }
+
         public Task<T> InvokeOnMainThreadAsync<T>(Func<T> task)
         {
             return Task.FromResult(task.Invoke());
