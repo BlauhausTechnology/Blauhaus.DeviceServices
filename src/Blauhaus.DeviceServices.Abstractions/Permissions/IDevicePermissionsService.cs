@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Blauhaus.Responses;
 using CSharpFunctionalExtensions;
 
 namespace Blauhaus.DeviceServices.Abstractions.Permissions
@@ -6,8 +7,8 @@ namespace Blauhaus.DeviceServices.Abstractions.Permissions
     public interface IDevicePermissionsService
     {
 
-        Task<Result> EnsurePermissionGrantedAsync(DevicePermission permission);
-        Task<Result> CheckPermissionAsync(DevicePermission permission);
-        Task<Result> RequestPermissionAsync(DevicePermission permission);
+        Task<Response> EnsurePermissionGrantedAsync(DevicePermission permission);
+        Task<Response> CheckPermissionAsync(DevicePermission permission);
+        Task<Response> RequestPermissionAsync(DevicePermission permission);
     }
 }
