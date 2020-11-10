@@ -5,7 +5,6 @@ using Blauhaus.Analytics.Abstractions.Service;
 using Blauhaus.DeviceServices.Abstractions.Permissions;
 using Blauhaus.DeviceServices.Abstractions.Thread;
 using Blauhaus.Responses;
-using CSharpFunctionalExtensions;
 using Xamarin.Essentials; 
 
 namespace Blauhaus.DeviceServices.Common.Permissions

@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Blauhaus.Responses;
-using CSharpFunctionalExtensions;
 
 namespace Blauhaus.DeviceServices.Abstractions.Permissions
 {

@@ -1,7 +1,6 @@
 ﻿using Blauhaus.DeviceServices.Abstractions.Permissions;
 using Blauhaus.Responses;
 using Blauhaus.TestHelpers.MockBuilders;
-using CSharpFunctionalExtensions;
 using Moq;
 
 namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
