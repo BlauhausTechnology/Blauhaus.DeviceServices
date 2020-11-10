@@ -43,6 +43,6 @@ namespace Blauhaus.DeviceServices.TestHelpers.Dummies
             return Task.FromResult(new SynchronizationContext());
         }
 
-        public bool IsOnMainThread { get; }
+        public bool IsOnMainThread { get; } = true;
     }
 }
