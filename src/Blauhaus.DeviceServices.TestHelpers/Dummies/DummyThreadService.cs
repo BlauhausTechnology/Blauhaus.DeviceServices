@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Blauhaus.DeviceServices.Abstractions.Thread;
 
-namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
+namespace Blauhaus.DeviceServices.TestHelpers.Dummies
 {
     public class DummyThreadService : IThreadService
     {
@@ -43,6 +43,6 @@ namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
             return Task.FromResult(new SynchronizationContext());
         }
 
-        public bool IsOnMainThread { get; }
+        public bool IsOnMainThread { get; } = true;
     }
 }

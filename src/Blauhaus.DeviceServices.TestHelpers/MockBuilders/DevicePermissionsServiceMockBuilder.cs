@@ -1,6 +1,6 @@
 ﻿using Blauhaus.DeviceServices.Abstractions.Permissions;
+using Blauhaus.Responses;
 using Blauhaus.TestHelpers.MockBuilders;
-using CSharpFunctionalExtensions;
 using Moq;
 
 namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
@@ -9,31 +9,31 @@ namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
     {
         public DevicePermissionsServiceMockBuilder()
         {
-            Where_RequestPermissionAsync_returns(Result.Success());
+            Where_RequestPermissionAsync_returns(Response.Success());
         }
 
-        public DevicePermissionsServiceMockBuilder Where_CheckPermissionAsync_returns(Result result)
+        public DevicePermissionsServiceMockBuilder Where_CheckPermissionAsync_returns(Response result)
         {
             Mock.Setup(x => x.CheckPermissionAsync(It.IsAny<DevicePermission>()))
                 .ReturnsAsync(result);
             return this;
         }
 
-        public DevicePermissionsServiceMockBuilder Where_CheckPermissionAsync_returns(Result result, DevicePermission requestedPermission)
+        public DevicePermissionsServiceMockBuilder Where_CheckPermissionAsync_returns(Response result, DevicePermission requestedPermission)
         {
             Mock.Setup(x => x.CheckPermissionAsync(requestedPermission))
                 .ReturnsAsync(result);
             return this;
         }
 
-        public DevicePermissionsServiceMockBuilder Where_RequestPermissionAsync_returns(Result result)
+        public DevicePermissionsServiceMockBuilder Where_RequestPermissionAsync_returns(Response result)
         {
             Mock.Setup(x => x.RequestPermissionAsync(It.IsAny<DevicePermission>()))
                 .ReturnsAsync(result);
             return this;
         }
 
-        public DevicePermissionsServiceMockBuilder Where_RequestPermissionAsync_returns(Result result, DevicePermission requestedPermission)
+        public DevicePermissionsServiceMockBuilder Where_RequestPermissionAsync_returns(Response result, DevicePermission requestedPermission)
         {
             Mock.Setup(x => x.RequestPermissionAsync(requestedPermission))
                 .ReturnsAsync(result);
