@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Blauhaus.DeviceServices.Abstractions.Application;
+﻿using Blauhaus.DeviceServices.Abstractions.Application;
 using Xamarin.Essentials;
 
 namespace Blauhaus.DeviceServices.Common.Application
