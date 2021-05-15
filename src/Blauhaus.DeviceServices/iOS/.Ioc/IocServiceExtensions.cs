@@ -2,7 +2,7 @@
 using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
 using Blauhaus.Ioc.Abstractions;
 
-namespace Blauhaus.DeviceServices.iOS._Ioc
+namespace Blauhaus.DeviceServices.iOS.Ioc
 {
     public static class IocServiceExtensions
     {
