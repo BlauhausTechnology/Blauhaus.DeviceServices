@@ -10,7 +10,7 @@ using Blauhaus.DeviceServices.Common.SecureStorage;
 using Blauhaus.DeviceServices.Common.Thread;
 using Blauhaus.Ioc.Abstractions;
 
-namespace Blauhaus.DeviceServices.Common._Ioc
+namespace Blauhaus.DeviceServices.Common.Ioc
 {
     public static class IocServiceExtensions
     {
