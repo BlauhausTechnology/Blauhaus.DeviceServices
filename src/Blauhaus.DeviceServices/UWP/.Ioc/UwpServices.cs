@@ -6,7 +6,7 @@ using Blauhaus.DeviceServices.Common.Application;
 using Blauhaus.DeviceServices.Common.SecureStorage;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Blauhaus.DeviceServices.UWP._Ioc
+namespace Blauhaus.DeviceServices.UWP.Ioc
 {
     public class UwpServices : ServiceCollection
     {
