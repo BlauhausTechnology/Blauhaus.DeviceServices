@@ -53,6 +53,5 @@ namespace Blauhaus.DeviceServices.Common.Connectivity
                 (ConnectionAccess) Xamarin.Essentials.Connectivity.NetworkAccess, 
                 Xamarin.Essentials.Connectivity.ConnectionProfiles.Select(x => (ConnectionType)x));
         }
-         
     }
 }
