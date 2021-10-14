@@ -14,13 +14,14 @@ namespace Blauhaus.DeviceServices.Common.Ioc
 {
     public static class ServiceCollectionExtensions
     {
+
         public static IServiceCollection AddDeviceServices(this IServiceCollection services)
         {
-            services.AddTransient<IApplicationInfoService, ApplicationInfoService>();
-            services.AddTransient<ISecureStorageService, SecureStorageService>();
-            services.AddTransient<IThreadService, ThreadService>();
-            services.AddTransient<IConnectivityService, ConnectivityService>();
-            services.AddTransient<IDevicePermissionsService, DevicePermissionsService>();
+            services.AddSingleton<IApplicationInfoService, ApplicationInfoService>();
+            services.AddSingleton<ISecureStorageService, SecureStorageService>();
+            services.AddSingleton<IThreadService, ThreadService>();
+            services.AddSingleton<IConnectivityService, ConnectivityService>();
+            services.AddSingleton<IDevicePermissionsService, DevicePermissionsService>();
             return services;
         }
     }

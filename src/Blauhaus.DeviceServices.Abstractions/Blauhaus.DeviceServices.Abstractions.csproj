@@ -7,10 +7,11 @@
     <Description>Simple device functions wrapped around Xamarin.Essentials</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+   
 
   <ItemGroup>
     <PackageReference Include="Blauhaus.Analytics.Abstractions" Version="1.7.2" />
-    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="1.12.0" />
+    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="1.12.1" />
   </ItemGroup>
 
 </Project>

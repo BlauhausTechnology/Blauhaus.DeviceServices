@@ -16,11 +16,11 @@ namespace Blauhaus.DeviceServices.Common.Ioc
     {
         public static IIocService AddDeviceServices(this IIocService iocService)
         {
-            iocService.RegisterImplementation<IApplicationInfoService, ApplicationInfoService>();
-            iocService.RegisterImplementation<ISecureStorageService, SecureStorageService>();
-            iocService.RegisterImplementation<IThreadService, ThreadService>();
-            iocService.RegisterImplementation<IConnectivityService, ConnectivityService>();
-            iocService.RegisterImplementation<IDevicePermissionsService, DevicePermissionsService>();
+            iocService.RegisterImplementation<IApplicationInfoService, ApplicationInfoService>(IocLifetime.Singleton);
+            iocService.RegisterImplementation<ISecureStorageService, SecureStorageService>(IocLifetime.Singleton);
+            iocService.RegisterImplementation<IThreadService, ThreadService>(IocLifetime.Singleton);
+            iocService.RegisterImplementation<IConnectivityService, ConnectivityService>(IocLifetime.Singleton);
+            iocService.RegisterImplementation<IDevicePermissionsService, DevicePermissionsService>(IocLifetime.Singleton);
             return iocService;
         }
     }
