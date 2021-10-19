@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Blauhaus.Common.ValueObjects._Base;
+using Blauhaus.Common.ValueObjects.Base;
 
 namespace Blauhaus.DeviceServices.Abstractions.Connectivity
 {
