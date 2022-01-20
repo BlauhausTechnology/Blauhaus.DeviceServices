@@ -10,8 +10,20 @@ namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
         public DevicePermissionsServiceMockBuilder()
         {
             Where_RequestPermissionAsync_returns(Response.Success());
+            Where_EnsurePermissionGrantedAsync_returns(Response.Success());
         }
-
+        public DevicePermissionsServiceMockBuilder Where_EnsurePermissionGrantedAsync_returns(Response result, DevicePermission permission)
+        {
+            Mock.Setup(x => x.EnsurePermissionGrantedAsync(permission))
+                .ReturnsAsync(result);
+            return this;
+        }
+        public DevicePermissionsServiceMockBuilder Where_EnsurePermissionGrantedAsync_returns(Response result)
+        {
+            Mock.Setup(x => x.EnsurePermissionGrantedAsync(It.IsAny<DevicePermission>()))
+                .ReturnsAsync(result);
+            return this;
+        }
         public DevicePermissionsServiceMockBuilder Where_CheckPermissionAsync_returns(Response result)
         {
             Mock.Setup(x => x.CheckPermissionAsync(It.IsAny<DevicePermission>()))
