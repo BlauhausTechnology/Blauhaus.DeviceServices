@@ -45,13 +45,13 @@ public abstract class BaseDeviceInfoService : IDeviceInfoService
         {
             Platform = RuntimePlatform.iOS;
         }
-        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+        else if (DeviceInfo.Platform == DevicePlatform.WinUI || DeviceInfo.Platform == DevicePlatform.UWP)
         {
-            Platform = RuntimePlatform.UWP;
+            Platform = RuntimePlatform.Windows;
         }
         else if (DeviceInfo.Platform == DevicePlatform.MacCatalyst || DeviceInfo.Platform == DevicePlatform.macOS)
         {
-            Platform = RuntimePlatform.UWP;
+            Platform = RuntimePlatform.Mac;
         }
         else
         {
@@ -63,7 +63,7 @@ public abstract class BaseDeviceInfoService : IDeviceInfoService
     public IRuntimePlatform Platform { get; }
     public string OperatingSystemVersion { get; }
     public string Manufacturer { get; }
-    public string Model { get; }
+    public virtual string Model => DeviceInfo.Model;
 
     public string AppDataFolder { get; }
 
