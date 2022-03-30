@@ -121,7 +121,7 @@ namespace Blauhaus.DeviceServices.Common.Permissions
                 }
                 catch (Exception e)
                 {
-                    return _analyticsService.LogExceptionResponse(this, e, DevicePermissionErrors.PermissionException(typeof(T).Name, e.Message));
+                    return _analyticsService.LogExceptionResponse(this, e, DevicePermissionErrors.PermissionException(typeof(T).Name));
                 }
             });
 
@@ -150,7 +150,7 @@ namespace Blauhaus.DeviceServices.Common.Permissions
                 }
                 catch (Exception e)
                 {
-                    return _analyticsService.LogExceptionResponse(this, e, DevicePermissionErrors.PermissionException(typeof(T).Name, e.Message));
+                    return _analyticsService.LogExceptionResponse(this, e, DevicePermissionErrors.PermissionException(typeof(T).Name));
                 }
             });
         }
