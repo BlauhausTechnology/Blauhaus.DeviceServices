@@ -1,8 +1,3 @@
-# Universal Windows Platform
-# Build a Universal Windows Platform project using Visual Studio.
-# Add steps that test and distribute an app, save build artifacts, and more:
-# https://aka.ms/yaml
-
 trigger:
 - release/*
 
@@ -18,6 +13,10 @@ variables:
 steps:
 - powershell: Write-Host "Branch Name $(Build.SourceBranchName)"
 
+- task: CmdLine@2
+  inputs:
+    script: 'dotnet workload install maui'
+    
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
