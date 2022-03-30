@@ -6,7 +6,7 @@ namespace Blauhaus.DeviceServices.Android
 {
     public class AndroidDeviceInfoService : BaseDeviceInfoService
     {
-        private string _modelName;
+        private string? _modelName;
 
         public override string Model
         {
@@ -26,7 +26,7 @@ namespace Blauhaus.DeviceServices.Android
 
         protected override string GetPlatformDeviceId()
         {
-            return Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
+            return Settings.Secure.GetString(Application.Context.ApplicationContext!.ContentResolver, Settings.Secure.AndroidId)!;
         }
 
     }
