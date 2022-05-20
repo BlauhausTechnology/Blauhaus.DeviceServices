@@ -17,7 +17,14 @@ public abstract class BaseDeviceInfoService : IDeviceInfoService
 
     protected BaseDeviceInfoService()
     {
-        AppDataFolder = FileSystem.AppDataDirectory;
+        try
+        {
+            AppDataFolder = FileSystem.AppDataDirectory;
+        }
+        catch (Exception)
+        {
+            AppDataFolder = "unknown";
+        }
 
         if (DeviceInfo.Idiom == DeviceIdiom.Phone)
             Type = DeviceType.Phone;
