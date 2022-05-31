@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Globalization;
+using System.Threading.Tasks;
 using Blauhaus.Common.ValueObjects.DeviceType;
 using Blauhaus.Common.ValueObjects.RuntimePlatforms;
 using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
@@ -58,6 +59,7 @@ namespace Blauhaus.DeviceServices.Common.DeviceInfo
         public string Manufacturer { get; }
         public virtual string Model => Xamarin.Essentials.DeviceInfo.Model;
         public string AppDataFolder { get; }
+        public CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
 
         public string DeviceUniqueIdentifier
         {

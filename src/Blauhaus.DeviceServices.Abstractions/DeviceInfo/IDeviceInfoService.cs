@@ -1,4 +1,5 @@
-﻿using Blauhaus.Common.ValueObjects.DeviceType;
+﻿using System.Globalization;
+using Blauhaus.Common.ValueObjects.DeviceType;
 using Blauhaus.Common.ValueObjects.RuntimePlatforms;
 
 namespace Blauhaus.DeviceServices.Abstractions.DeviceInfo
@@ -12,6 +13,6 @@ namespace Blauhaus.DeviceServices.Abstractions.DeviceInfo
         string Model { get; }
         string DeviceUniqueIdentifier { get; }
         string AppDataFolder { get; }
-        
+        CultureInfo CurrentCulture { get; }
     }
 }
