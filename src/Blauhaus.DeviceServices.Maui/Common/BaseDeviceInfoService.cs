@@ -1,4 +1,5 @@
-﻿using Blauhaus.Common.ValueObjects.DeviceType;
+﻿using System.Globalization;
+using Blauhaus.Common.ValueObjects.DeviceType;
 using Blauhaus.Common.ValueObjects.RuntimePlatforms;
 using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
 using DeviceType = Blauhaus.Common.ValueObjects.DeviceType.DeviceType;
@@ -73,6 +74,7 @@ public abstract class BaseDeviceInfoService : IDeviceInfoService
     public virtual string Model => DeviceInfo.Model;
 
     public string AppDataFolder { get; }
+    public CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
 
     public string DeviceUniqueIdentifier
     {
