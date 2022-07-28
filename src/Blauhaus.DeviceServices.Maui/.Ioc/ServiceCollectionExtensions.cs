@@ -13,13 +13,13 @@ public static class ServiceCollectionExtensions
 {
 
 
-    public static IServiceCollection AddDeviceServices(this IServiceCollection services)
+    public static IServiceCollection AddMauiDeviceServices(this IServiceCollection services)
     {
-        services.TryAddTransient<IApplicationInfoService, ApplicationInfoService>();
-        services.TryAddSingleton<IConnectivityService, ConnectivityService>();
-        services.TryAddSingleton<IDevicePermissionsService, DevicePermissionsService>();
-        services.TryAddSingleton<ISecureStorageService, SecureStorageService>();
-        services.TryAddSingleton<IThreadService, ThreadService>();
+        services.AddSingleton<IApplicationInfoService, ApplicationInfoService>();
+        services.AddSingleton<IConnectivityService, ConnectivityService>();
+        services.AddSingleton<IDevicePermissionsService, DevicePermissionsService>();
+        services.AddSingleton<ISecureStorageService, SecureStorageService>();
+        services.AddSingleton<IThreadService, ThreadService>();
         
 
 #if IOS
@@ -39,7 +39,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IRuntimePlatform>(RuntimePlatform.Mac);
 
 #else
-        services.TryAddSingleton<IDeviceInfoService, DeviceInfoService>();
+        services.AddSingleton<IDeviceInfoService, DeviceInfoService>();
         services.AddSingleton<IRuntimePlatform>(RuntimePlatform.Unknown);
 
 #endif
