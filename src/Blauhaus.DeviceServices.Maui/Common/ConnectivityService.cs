@@ -11,6 +11,9 @@ namespace Blauhaus.DeviceServices.Maui
     {
         private readonly IAnalyticsLogger<ConnectivityService> _logger;
         private ConnectionAccess _previousNetworkAccess = ConnectionAccess.Unknown;
+        
+        private IConnectivity _mauiConnectivity 
+            => Connectivity.Current;
 
         public ConnectivityService(IAnalyticsLogger<ConnectivityService> logger)
         {
@@ -25,15 +28,16 @@ namespace Blauhaus.DeviceServices.Maui
         }
        
         public bool IsConnectedToInternet 
-            => Connectivity.NetworkAccess == NetworkAccess.Internet;
+            => _mauiConnectivity.NetworkAccess == NetworkAccess.Internet;
+        
            
         public bool IsConnectionUsingCellularData 
-            => Connectivity.NetworkAccess == NetworkAccess.Internet 
-               && Connectivity.ConnectionProfiles.Contains(ConnectionProfile.Cellular);
+            => _mauiConnectivity.NetworkAccess == NetworkAccess.Internet 
+               && _mauiConnectivity.ConnectionProfiles.Contains(ConnectionProfile.Cellular);
 
         public ConnectionState CurrentConnection => GetState();
          
-        private async void HandleConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        private async void HandleConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
         {
             var newConnectionState = GetState();
             if (newConnectionState.Access != _previousNetworkAccess)
@@ -48,8 +52,8 @@ namespace Blauhaus.DeviceServices.Maui
         private ConnectionState GetState()
         {
             var currentState = new ConnectionState(
-                (ConnectionAccess) Connectivity.NetworkAccess, 
-                Connectivity.ConnectionProfiles.Select(x => (ConnectionType)x));
+                (ConnectionAccess) _mauiConnectivity.NetworkAccess, 
+                _mauiConnectivity.ConnectionProfiles.Select(x => (ConnectionType)x));
 
             _logger.LogTrace("Retrieved current network state: {NetworkAccess}. IsConnected: {IsConnected}", currentState.Access, currentState.IsConnected);
 
