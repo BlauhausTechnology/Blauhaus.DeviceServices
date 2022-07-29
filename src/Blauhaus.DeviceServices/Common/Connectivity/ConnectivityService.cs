@@ -33,6 +33,11 @@ namespace Blauhaus.DeviceServices.Common.Connectivity
             => Xamarin.Essentials.Connectivity.NetworkAccess == NetworkAccess.Internet 
                && Xamarin.Essentials.Connectivity.ConnectionProfiles.Contains(ConnectionProfile.Cellular);
 
+        public Task<ConnectionState> GetConnectionStateAsync()
+        {
+            return Task.FromResult(GetState());
+        }
+
         public ConnectionState CurrentConnection => GetState();
          
         private async void HandleConnectivityChanged(object sender, ConnectivityChangedEventArgs e)

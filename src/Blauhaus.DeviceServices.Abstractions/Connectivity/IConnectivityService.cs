@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Blauhaus.Common.Abstractions;
 
 namespace Blauhaus.DeviceServices.Abstractions.Connectivity
@@ -7,6 +8,8 @@ namespace Blauhaus.DeviceServices.Abstractions.Connectivity
     {
         bool IsConnectedToInternet { get; }
         bool IsConnectionUsingCellularData { get; }
+
+        Task<ConnectionState> GetConnectionStateAsync();
 
         ConnectionState CurrentConnection { get; }
     }

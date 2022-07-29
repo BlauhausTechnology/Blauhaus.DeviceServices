@@ -3,6 +3,7 @@ using Blauhaus.Analytics.Abstractions.Extensions;
 using Blauhaus.Analytics.Abstractions.Service;
 using Blauhaus.Common.Utils.Disposables;
 using Blauhaus.DeviceServices.Abstractions.Connectivity;
+using Blauhaus.DeviceServices.Abstractions.Thread;
 using Microsoft.Extensions.Logging;
 
 namespace Blauhaus.DeviceServices.Maui
@@ -10,14 +11,18 @@ namespace Blauhaus.DeviceServices.Maui
     public class ConnectivityService : BasePublisher, IConnectivityService
     {
         private readonly IAnalyticsLogger<ConnectivityService> _logger;
+        private readonly IThreadService _threadService;
         private ConnectionAccess _previousNetworkAccess = ConnectionAccess.Unknown;
         
         private IConnectivity _mauiConnectivity 
             => Connectivity.Current;
 
-        public ConnectivityService(IAnalyticsLogger<ConnectivityService> logger)
+        public ConnectivityService(
+            IAnalyticsLogger<ConnectivityService> logger,
+            IThreadService threadService)
         {
             _logger = logger;
+            _threadService = threadService;
 
             Connectivity.ConnectivityChanged += HandleConnectivityChanged;
         }
@@ -47,6 +52,19 @@ namespace Blauhaus.DeviceServices.Maui
                 _previousNetworkAccess = newConnectionState.Access;
             }
             
+        }
+        public async Task<ConnectionState> GetConnectionStateAsync()
+        {
+            return await _threadService.InvokeOnMainThreadAsync(() =>
+            {
+                var currentState = new ConnectionState(
+                    (ConnectionAccess)_mauiConnectivity.NetworkAccess,
+                    _mauiConnectivity.ConnectionProfiles.Select(x => (ConnectionType)x));
+
+                _logger.LogTrace("Retrieved current network state: {NetworkAccess}. IsConnected: {IsConnected}", currentState.Access, currentState.IsConnected);
+
+                return currentState;
+            });
         }
 
         private ConnectionState GetState()
