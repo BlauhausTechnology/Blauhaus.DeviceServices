@@ -9,7 +9,7 @@ namespace Blauhaus.DeviceServices.Abstractions.Connectivity
         bool IsConnectedToInternet { get; }
         bool IsConnectionUsingCellularData { get; }
 
-        Task<ConnectionState> GetConnectionStateAsync();
+        ValueTask<ConnectionState> GetConnectionStateAsync();
 
         ConnectionState CurrentConnection { get; }
     }

@@ -14,8 +14,8 @@ namespace Blauhaus.DeviceServices.Maui
         private readonly IThreadService _threadService;
         private ConnectionAccess _previousNetworkAccess = ConnectionAccess.Unknown;
         
-        private IConnectivity _mauiConnectivity 
-            => Connectivity.Current;
+        private static IConnectivity MauiConnectivity => Connectivity.Current;
+        private ConnectionState? _currentState;
 
         public ConnectivityService(
             IAnalyticsLogger<ConnectivityService> logger,
@@ -33,12 +33,12 @@ namespace Blauhaus.DeviceServices.Maui
         }
        
         public bool IsConnectedToInternet 
-            => _mauiConnectivity.NetworkAccess == NetworkAccess.Internet;
+            => MauiConnectivity.NetworkAccess == NetworkAccess.Internet;
         
            
         public bool IsConnectionUsingCellularData 
-            => _mauiConnectivity.NetworkAccess == NetworkAccess.Internet 
-               && _mauiConnectivity.ConnectionProfiles.Contains(ConnectionProfile.Cellular);
+            => MauiConnectivity.NetworkAccess == NetworkAccess.Internet 
+               && MauiConnectivity.ConnectionProfiles.Contains(ConnectionProfile.Cellular);
 
         public ConnectionState CurrentConnection => GetState();
          
@@ -50,28 +50,34 @@ namespace Blauhaus.DeviceServices.Maui
                 _logger.LogTrace("Network access changed from {OldNetworkAccess} to {NetworkAccess}", _previousNetworkAccess, newConnectionState.Access);
                 await UpdateSubscribersAsync(newConnectionState);
                 _previousNetworkAccess = newConnectionState.Access;
+                _currentState = newConnectionState;
             }
             
         }
-        public async Task<ConnectionState> GetConnectionStateAsync()
+        public async ValueTask<ConnectionState> GetConnectionStateAsync()
         {
+            if (_currentState is not null)
+            {
+                return _currentState;
+            }
+
             return await _threadService.InvokeOnMainThreadAsync(() =>
             {
-                var currentState = new ConnectionState(
-                    (ConnectionAccess)_mauiConnectivity.NetworkAccess,
-                    _mauiConnectivity.ConnectionProfiles.Select(x => (ConnectionType)x));
+                _currentState = new ConnectionState(
+                    (ConnectionAccess)MauiConnectivity.NetworkAccess,
+                    MauiConnectivity.ConnectionProfiles.Select(x => (ConnectionType)x));
 
-                _logger.LogTrace("Retrieved current network state: {NetworkAccess}. IsConnected: {IsConnected}", currentState.Access, currentState.IsConnected);
+                _logger.LogTrace("Retrieved current network state: {NetworkAccess}. IsConnected: {IsConnected}", _currentState.Access, _currentState.IsConnected);
 
-                return currentState;
+                return _currentState;
             });
         }
 
         private ConnectionState GetState()
         {
             var currentState = new ConnectionState(
-                (ConnectionAccess) _mauiConnectivity.NetworkAccess, 
-                _mauiConnectivity.ConnectionProfiles.Select(x => (ConnectionType)x));
+                (ConnectionAccess) MauiConnectivity.NetworkAccess, 
+                MauiConnectivity.ConnectionProfiles.Select(x => (ConnectionType)x));
 
             _logger.LogTrace("Retrieved current network state: {NetworkAccess}. IsConnected: {IsConnected}", currentState.Access, currentState.IsConnected);
 
