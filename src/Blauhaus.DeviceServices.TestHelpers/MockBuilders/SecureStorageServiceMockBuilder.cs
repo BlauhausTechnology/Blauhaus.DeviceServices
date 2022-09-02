@@ -6,7 +6,7 @@ using Moq;
 
 namespace Blauhaus.DeviceServices.TestHelpers.MockBuilders
 {
-    public class SecureStorageServiceMockBuilder : BaseKeyValueProviderMockBuilder<SecureStorageServiceMockBuilder, ISecureStorageService>
+    public class SecureStorageServiceMockBuilder : BaseKeyValueStoreMockBuilder<SecureStorageServiceMockBuilder, ISecureStorageService>
     {
         public SecureStorageServiceMockBuilder()
         {

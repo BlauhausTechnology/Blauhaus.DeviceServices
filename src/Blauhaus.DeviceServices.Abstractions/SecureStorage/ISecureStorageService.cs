@@ -3,7 +3,7 @@ using Blauhaus.Common.Abstractions;
 
 namespace Blauhaus.DeviceServices.Abstractions.SecureStorage
 {
-    public interface ISecureStorageService : IKeyValueProvider
+    public interface ISecureStorageService : IKeyValueStore
     { 
     }
 }

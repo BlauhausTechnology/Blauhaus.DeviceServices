@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Blauhaus.DeviceServices.Blazor.Services;
 
-public class BlazorLocalStorageService : IKeyValueProvider
+public class BlazorLocalStorageService : IKeyValueStore
 {
     private readonly IAnalyticsLogger<BlazorLocalStorageService> _logger;
     private readonly ILocalStorageService _localStorageService;

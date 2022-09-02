@@ -9,6 +9,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddBlazorDeviceServices(this IServiceCollection services)
     {
         return services
-            .AddSingleton<IKeyValueProvider, BlazorLocalStorageService>();
+            .AddSingleton<IKeyValueStore, BlazorLocalStorageService>();
     }
 }

@@ -20,7 +20,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IConnectivityService, ConnectivityService>();
         services.AddSingleton<IDevicePermissionsService, DevicePermissionsService>();
         services.AddSingleton<ISecureStorageService, SecureStorageService>();
-        services.AddSingleton<IKeyValueProvider>(sp => sp.GetRequiredService<ISecureStorageService>());
+        services.AddSingleton<IKeyValueStore>(sp => sp.GetRequiredService<ISecureStorageService>());
         services.AddSingleton<IThreadService, ThreadService>();
         
 
