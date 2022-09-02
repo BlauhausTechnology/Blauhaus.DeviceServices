@@ -12,7 +12,7 @@ namespace Blauhaus.DeviceServices.Maui
         {
             _logger = logger;
         }
-
+         
         public Task<string> GetAsync(string key)
         {
             _logger.LogTrace("Retrieved value for {ValueName} from secure storage", key);

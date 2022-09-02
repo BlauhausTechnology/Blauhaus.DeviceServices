@@ -1,11 +1,9 @@
 ﻿using System.Threading.Tasks;
+using Blauhaus.Common.Abstractions;
 
 namespace Blauhaus.DeviceServices.Abstractions.SecureStorage
 {
-    public interface ISecureStorageService
-    {
-        Task<string> GetAsync(string key);
-        Task SetAsync(string key, string value);
-        bool Remove(string key);
+    public interface ISecureStorageService : IKeyValueProvider
+    { 
     }
 }

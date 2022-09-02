@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <LangVersion>8</LangVersion>
+    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <Description>Simple device functions wrapped around Xamarin.Essentials</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -10,8 +10,8 @@
    
 
   <ItemGroup>
-    <PackageReference Include="Blauhaus.Analytics.Abstractions" Version="1.8.46" />
-    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="2.1.11" />
+    <PackageReference Include="Blauhaus.Analytics.Abstractions" Version="1.9.11" />
+    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="2.1.14" />
   </ItemGroup>
 
 </Project>
