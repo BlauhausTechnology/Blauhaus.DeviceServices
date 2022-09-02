@@ -1,4 +1,5 @@
-﻿using Blauhaus.Common.ValueObjects.RuntimePlatforms;
+﻿using Blauhaus.Common.Abstractions;
+using Blauhaus.Common.ValueObjects.RuntimePlatforms;
 using Blauhaus.DeviceServices.Abstractions.Application;
 using Blauhaus.DeviceServices.Abstractions.Connectivity;
 using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
@@ -19,6 +20,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IConnectivityService, ConnectivityService>();
         services.AddSingleton<IDevicePermissionsService, DevicePermissionsService>();
         services.AddSingleton<ISecureStorageService, SecureStorageService>();
+        services.AddSingleton<IKeyValueProvider>(sp => sp.GetRequiredService<ISecureStorageService>());
         services.AddSingleton<IThreadService, ThreadService>();
         
 
