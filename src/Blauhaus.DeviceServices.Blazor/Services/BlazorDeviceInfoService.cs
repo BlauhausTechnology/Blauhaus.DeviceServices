@@ -8,11 +8,11 @@ namespace Blauhaus.DeviceServices.Blazor.Services;
 
 public class BlazorDeviceInfoService : IDeviceInfoService
 {
-    private readonly ILocalStorageService _localStorageService;
+    private readonly ISyncLocalStorageService _localStorageService;
     private string? _deviceId;
     private const string DeviceKey = "DeviceUniqueId";
 
-    public BlazorDeviceInfoService(ILocalStorageService localStorageService)
+    public BlazorDeviceInfoService(ISyncLocalStorageService localStorageService)
     {
         _localStorageService = localStorageService;
     }
@@ -31,11 +31,11 @@ public class BlazorDeviceInfoService : IDeviceInfoService
         {
             if (_deviceId == null)
             {
-                _deviceId = Task.Run(async () => await _localStorageService.GetItemAsStringAsync(DeviceKey)).GetAwaiter().GetResult();
+                _deviceId = _localStorageService.GetItemAsString(DeviceKey);
                 if (string.IsNullOrEmpty(_deviceId))
                 {
                     _deviceId = Guid.NewGuid().ToString();
-                    Task.Run(async ()=> await _localStorageService.SetItemAsStringAsync(DeviceKey, _deviceId)).GetAwaiter().GetResult();
+                    _localStorageService.SetItemAsString(DeviceKey, _deviceId);
                 }
             }
             return _deviceId;
