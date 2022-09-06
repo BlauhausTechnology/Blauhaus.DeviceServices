@@ -12,9 +12,9 @@ public class BlazorThreadService : IThreadService
         action.Invoke();
     }
 
-    public void InvokeOnMainThread(Task task)
+    public async void InvokeOnMainThread(Task task)
     {
-        Task.Run(()=> task);
+        await task;
     }
 
     public async Task<T> InvokeOnMainThreadAsync<T>(Func<T> task)
@@ -22,19 +22,20 @@ public class BlazorThreadService : IThreadService
         return task.Invoke();
     }
 
-    public async Task InvokeOnMainThreadAsync(Action action)
+    public Task InvokeOnMainThreadAsync(Action action)
     {
-        await Task.Run(action.Invoke);
+        action.Invoke();
+        return Task.CompletedTask;
     }
 
     public async Task<T> InvokeOnMainThreadAsync<T>(Func<Task<T>> task)
     {
-        return await Task.Run(task.Invoke);
+        return await task.Invoke();
     }
 
     public async Task InvokeOnMainThreadAsync(Func<Task> task)
     {
-        await Task.Run(task);
+        await task.Invoke();
     }
 
     public async Task<SynchronizationContext> GetMainThreadSynchronizationContextAsync()
