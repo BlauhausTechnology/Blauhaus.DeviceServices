@@ -20,7 +20,5 @@ public static class ServiceCollectionExtensions
             .AddSingleton<IConnectivityService, BlazorConnectivityService>()
             .AddSingleton<IThreadService, BlazorThreadService>()
             .AddSingleton<IDeviceInfoService, BlazorDeviceInfoService>();
-
-        
     }
 }

@@ -63,19 +63,21 @@ namespace Blauhaus.DeviceServices.Common.DeviceInfo
 
         public string DeviceUniqueIdentifier
         {
-            get
+            get { return _deviceId ??= Task.Run(async () => await GetDeviceIdentifierAsync()).GetAwaiter().GetResult(); }
+        }
+
+        public async ValueTask<string> GetDeviceIdentifierAsync()
+        {
+            if (_deviceId == null)
             {
-                if (_deviceId == null)
+                _deviceId = await Xamarin.Essentials.SecureStorage.GetAsync(DeviceKey);
+                if (string.IsNullOrEmpty(_deviceId))
                 {
-                    _deviceId = Task.Run(() => Xamarin.Essentials.SecureStorage.GetAsync(DeviceKey)).GetAwaiter().GetResult();
-                    if (string.IsNullOrEmpty(_deviceId))
-                    {
-                        _deviceId = GetPlatformDeviceId();
-                        Xamarin.Essentials.SecureStorage.SetAsync(DeviceKey, _deviceId);
-                    }
+                    _deviceId = GetPlatformDeviceId();
+                    await Xamarin.Essentials.SecureStorage.SetAsync(DeviceKey, _deviceId);
                 }
-                return _deviceId;
             }
+            return _deviceId;
         }
 
         protected abstract string GetPlatformDeviceId();

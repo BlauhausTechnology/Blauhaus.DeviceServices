@@ -75,21 +75,23 @@ public abstract class BaseDeviceInfoService : IDeviceInfoService
 
     public string AppDataFolder { get; }
     public CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
-
+     
     public string DeviceUniqueIdentifier
     {
-        get
+        get { return _deviceId ??= Task.Run(async () => await GetDeviceIdentifierAsync()).GetAwaiter().GetResult(); }
+    }
+
+    public async ValueTask<string> GetDeviceIdentifierAsync()
+    {
+        if (_deviceId == null)
         {
-            if (_deviceId == null)
+            _deviceId = await SecureStorage.GetAsync(DeviceKey);
+            if (string.IsNullOrEmpty(_deviceId))
             {
-                _deviceId = Task.Run(() => SecureStorage.GetAsync(DeviceKey)).GetAwaiter().GetResult();
-                if (string.IsNullOrEmpty(_deviceId))
-                {
-                    _deviceId = Guid.NewGuid().ToString();
-                    SecureStorage.SetAsync(DeviceKey, _deviceId);
-                }
+                _deviceId = Guid.NewGuid().ToString();
+                await SecureStorage.SetAsync(DeviceKey, _deviceId);
             }
-            return _deviceId;
         }
+        return _deviceId;
     }
 }

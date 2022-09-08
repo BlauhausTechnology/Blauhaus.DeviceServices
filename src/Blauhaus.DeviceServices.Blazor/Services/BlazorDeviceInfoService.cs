@@ -24,21 +24,23 @@ public class BlazorDeviceInfoService : IDeviceInfoService
     public string Model { get; } = "Unknown";
     public string AppDataFolder { get; }= "Unknown";
     public CultureInfo CurrentCulture => CultureInfo.CurrentUICulture;
-
+     
     public string DeviceUniqueIdentifier
     {
-        get
+        get { return _deviceId ??= Task.Run(async () => await GetDeviceIdentifierAsync()).GetAwaiter().GetResult(); }
+    }
+
+    public ValueTask<string> GetDeviceIdentifierAsync()
+    {
+        if (_deviceId == null)
         {
-            if (_deviceId == null)
+            _deviceId = _localStorageService.GetItemAsString(DeviceKey);
+            if (string.IsNullOrEmpty(_deviceId))
             {
-                _deviceId = _localStorageService.GetItemAsString(DeviceKey);
-                if (string.IsNullOrEmpty(_deviceId))
-                {
-                    _deviceId = Guid.NewGuid().ToString();
-                    _localStorageService.SetItemAsString(DeviceKey, _deviceId);
-                }
+                _deviceId = Guid.NewGuid().ToString();
+                _localStorageService.SetItemAsString(DeviceKey, _deviceId);
             }
-            return _deviceId;
         }
+        return new ValueTask<string>(_deviceId);
     }
 }
