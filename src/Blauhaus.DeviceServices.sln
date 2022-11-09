@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blauhaus.DeviceServices.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blauhaus.DeviceServices.Maui", "Blauhaus.DeviceServices.Maui\Blauhaus.DeviceServices.Maui.csproj", "{16030DB2-EA51-4162-8629-7BBDA0887B1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blauhaus.DeviceServices.Blazor", "Blauhaus.DeviceServices.Blazor\Blauhaus.DeviceServices.Blazor.csproj", "{6F84778C-F861-4F36-9FEB-DE3E153343D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blauhaus.DeviceServices.Blazor", "Blauhaus.DeviceServices.Blazor\Blauhaus.DeviceServices.Blazor.csproj", "{6F84778C-F861-4F36-9FEB-DE3E153343D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

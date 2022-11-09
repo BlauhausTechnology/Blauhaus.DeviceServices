@@ -32,10 +32,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Blauhaus.Common.Utils" Version="2.1.15" />
+		<PackageReference Include="Blauhaus.Common.Utils" Version="2.1.21" />
 		<PackageReference Include="Blauhaus.Ioc.Abstractions" Version="1.5.1" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
 	</ItemGroup>
 
