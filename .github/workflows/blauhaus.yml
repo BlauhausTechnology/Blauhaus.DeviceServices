@@ -2,7 +2,7 @@ name: Blauhaus Packages
 on:
   push:
     branches:
-    - release/*
+    - release/paused
 
 jobs:
 
@@ -31,7 +31,7 @@ jobs:
         dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
         
      - name: Deploy NuGet Package
-       run:  |
+       run: |
         dotnet nuget push /Users/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.Abstractions.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
         dotnet nuget push /Users/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
         dotnet nuget push /Users/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.Maui.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
