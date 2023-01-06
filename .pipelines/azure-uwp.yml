@@ -13,16 +13,17 @@ variables:
 steps:
 - powershell: Write-Host "Branch Name $(Build.SourceBranchName)"
 
+- task: Bash@3
+  displayName: Restore nuget
+  inputs:
+    targetType: 'inline'
+    script: |
+        dotnet restore '$(solution)'
+
 - task: CmdLine@2
   inputs:
     script: 'dotnet workload install maui'
     
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
 - task: VSBuild@1
   inputs:
     platform: 'x86'
