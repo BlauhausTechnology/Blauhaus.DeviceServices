@@ -56,6 +56,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: | 
+        dotnet build ./src/Blauhaus.DeviceServices.sln --configuration Release
         dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f netstandard2.0 -c Release 
         dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f uap10.0.19041 -c Release 
         dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f MonoAndroid10.0 -c Release 
