@@ -12,8 +12,7 @@ variables:
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
-steps:
-#- powershell: Write-Host "Branch Name $(Build.SourceBranchName)"
+steps: 
 
 - task: UseDotNet@2
   displayName: .NET Version
@@ -37,19 +36,25 @@ steps:
   inputs:
     solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
     configuration: 'Release'
-    msbuildArgs: '/p:TargetFramework=Xamarin.iOS10 /t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(appxPackageDir)'
+    msbuildArgs: '/p:TargetFramework=netstandard2.0 /t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(build.sourcesdirectory)'
+ 
+- task: MSBuild@1
+  inputs:
+    solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
+    configuration: 'Release'
+    msbuildArgs: '/p:TargetFramework=Xamarin.iOS10 /t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(build.sourcesdirectory)'
     
 - task: MSBuild@1
   inputs:
     solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
     configuration: 'Release'
-    msbuildArgs: '/p:TargetFramework=MonoAndroid10.0 /t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(appxPackageDir)'
+    msbuildArgs: '/p:TargetFramework=MonoAndroid10.0 /t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(build.sourcesdirectory)'
     
 - task: MSBuild@1
   inputs:
     solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
     configuration: 'Release'
-    msbuildArgs: '/p:TargetFramework=uap10.0.19041 /t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(appxPackageDir)'
+    msbuildArgs: '/p:TargetFramework=uap10.0.19041 /t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(build.sourcesdirectory)'
 
 - task: Bash@3
   displayName: Build
@@ -60,13 +65,13 @@ steps:
         #dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f uap10.0.19041 -c Release -o $(build.sourcesdirectory) 
         #dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f MonoAndroid10.0 -c Release -o $(build.sourcesdirectory) 
         #dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f Xamarin.iOS10 -c Release -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -f netstandard2.0 -c Release -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-ios -c Release -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-android -c Release -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-windows10.0.19041 -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -f net7.0 -o $(build.sourcesdirectory) 
+        dotnet publish ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -f netstandard2.0 -c Release -o $(build.sourcesdirectory) 
+        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) 
+        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-ios -c Release -o $(build.sourcesdirectory) 
+        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-android -c Release -o $(build.sourcesdirectory) 
+        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-windows10.0.19041 -c Release  -o $(build.sourcesdirectory) 
+        dotnet publish ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) 
+        dotnet publish ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -f net7.0  -c Release -o $(build.sourcesdirectory) 
 
 - task: Bash@3
   displayName: Pack
@@ -74,16 +79,10 @@ steps:
     targetType: 'inline'
     script: | 
         dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release -o $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
-        #dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release -o $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
-        #dotnet pack ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -c Release -o $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
-        #dotnet pack ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -c Release -o $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
-        #dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -c Release -o $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
- 
-#- task: CopyFiles@2
-#  inputs:
-#    SourceFolder: '$(build.sourcesdirectory)'
-#    Contents: '**\bin\$(BuildConfiguration)\**\*.nupkg'
-#    TargetFolder: '$(build.artifactstagingdirectory)'
+        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release -o $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -c Release -o $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -c Release -o $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -c Release -o $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
 
 - task: NuGetCommand@2
   inputs:
