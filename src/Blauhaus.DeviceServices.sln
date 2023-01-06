@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2B72F5BF-F37D-44D6-8245-A4BB4B4803D4}"
 	ProjectSection(SolutionItems) = preProject
 		..\.pipelines\azure-uwp.yml = ..\.pipelines\azure-uwp.yml
+		..\.github\workflows\blauhaus.yml = ..\.github\workflows\blauhaus.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blauhaus.DeviceServices.TestHelpers", "Blauhaus.DeviceServices.TestHelpers\Blauhaus.DeviceServices.TestHelpers.csproj", "{94BD2950-A903-4BA3-9284-4919575C14AF}"
