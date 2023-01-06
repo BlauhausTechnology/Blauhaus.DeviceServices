@@ -73,11 +73,11 @@ steps:
   inputs:
     targetType: 'inline'
     script: | 
-        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=${VersionName} --no-build
-        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=${VersionName} --no-build
-        dotnet pack ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=${VersionName} --no-build
-        dotnet pack ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=${VersionName} --no-build
-        dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=${VersionName} --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -c Release --output $(build.sourcesdirectory) -p:PackageVersion=$(VersionName) --no-build
  
 #- task: CopyFiles@2
 #  inputs:
