@@ -56,8 +56,11 @@ steps:
   inputs:
     targetType: 'inline'
     script: | 
-        dotnet publish ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -f netstandard2.0 -c Release
         dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f netstandard2.0 -c Release 
+        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f uap10.0.19041 -c Release 
+        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f MonoAndroid10.0 -c Release 
+        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f Xamarin.iOS10 -c Release 
+        dotnet publish ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -f netstandard2.0 -c Release
         dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0 -c Release 
         dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-ios -c Release 
         dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-android -c Release 
