@@ -4,7 +4,7 @@
 		<TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid9.0;MonoAndroid10.0;MonoAndroid11.0;uap10.0.19041</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild> 
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems> 
 	</PropertyGroup>
 

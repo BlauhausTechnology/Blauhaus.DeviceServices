@@ -5,7 +5,7 @@
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild> 
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 
