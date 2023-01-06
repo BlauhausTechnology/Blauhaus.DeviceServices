@@ -36,25 +36,19 @@ steps:
 - task: MSBuild@1
   inputs:
     solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
-    platform: 'Any CPU'
     configuration: 'Release'
-    clean: true
     msbuildArgs: '/p:TargetFramework=Xamarin.iOS10 /t:restore;build;pack /p:PackageVersion=$(VersionName) /p:PackageOutputPath=$(appxPackageDir)'
     
 - task: MSBuild@1
   inputs:
     solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
-    platform: 'Any CPU'
     configuration: 'Release'
-    clean: true
     msbuildArgs: '/p:TargetFramework=MonoAndroid10.0 /t:restore;build;pack /p:PackageVersion=$(VersionName) /p:PackageOutputPath=$(appxPackageDir)'
     
 - task: MSBuild@1
   inputs:
     solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
-    platform: 'Any CPU'
     configuration: 'Release'
-    clean: true
     msbuildArgs: '/p:TargetFramework=uap10.0.19041 /t:restore;build;pack /p:PackageVersion=$(VersionName) /p:PackageOutputPath=$(appxPackageDir)'
 
 - task: Bash@3
@@ -64,12 +58,12 @@ steps:
     script: | 
         dotnet publish ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -f netstandard2.0 -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
         dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f netstandard2.0 -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
-        dotnet publish ./src/Blauhaus.Push.Client.Maui/Blauhaus.Push.Client.Maui.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
-        dotnet publish ./src/Blauhaus.Push.Client.Maui/Blauhaus.Push.Client.Maui.csproj -f net7.0-ios -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
-        dotnet publish ./src/Blauhaus.Push.Client.Maui/Blauhaus.Push.Client.Maui.csproj -f net7.0-android -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
-        dotnet publish ./src/Blauhaus.Push.Client.Maui/Blauhaus.Push.Client.Maui.csproj -f net7.0-windows10.0.19041 -c Release -p:PublishReadyToRun=false -o $(build.sourcesdirectory) -p:Version=$(VersionName)
-        dotnet publish ./src/Blauhaus.Push.Server/Blauhaus.Push.Server.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
-        dotnet publish ./src/Blauhaus.Push.TestHelpers/Blauhaus.Push.TestHelpers.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
+        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
+        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-ios -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
+        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-android -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
+        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-windows10.0.19041 -c Release -p:PublishReadyToRun=false -o $(build.sourcesdirectory) -p:Version=$(VersionName)
+        dotnet publish ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
+        dotnet publish ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -f net7.0 -c Release -o $(build.sourcesdirectory) -p:Version=$(VersionName)
 
 - task: CopyFiles@2
   inputs:
