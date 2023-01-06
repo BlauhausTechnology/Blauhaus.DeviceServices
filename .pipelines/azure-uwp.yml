@@ -18,7 +18,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-        dotnet restore '$(solution)'
+        dotnet restore '$(solution)' -p:PublishReadyToRun=true 
 
 - task: CmdLine@2
   inputs:
