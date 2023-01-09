@@ -37,24 +37,30 @@ jobs:
      env: 
        SolutionPath: ./src/Blauhaus.DeviceServices.sln
        Configuration: 'Release_Xamarin'
+
      steps:
+
      - uses: actions/checkout@v2
      - name: Set Version
        run: |
         npm install @actions/core --save
         node ./scripts/getversion.js
      - uses: microsoft/setup-msbuild@v1.0.2
+
      - uses: actions/setup-dotnet@v1
        with:
          dotnet-version: '7.x'
          include-prerelease: true
+
      - name: Install MAUI Workloads
        run: |
          dotnet workload install maui --ignore-failed-sources 
+
      - name: MS Build
        run: | 
-         echo ${env:VERSION_NAME}
-         msbuild /m /p:Configuration=${env:Configuration} /t:restore;build;pack /p:Version=${env:VERSION_NAME} ${env:SolutionPath}
+         msbuild /m /p:Configuration=${env:Configuration} /t:restore /p:Version=${env:VERSION_NAME} ${env:SolutionPath}
+         dotnet pack ./src/Blauhaus.DeviceServices.Xamarin/Blauhaus.DeviceServices.Xamarin.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
+
      - name: Deploy NuGet Package
        run: |
          dotnet nuget push /Users/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.Xamarin.${env:VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
