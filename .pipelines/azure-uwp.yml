@@ -10,7 +10,7 @@ variables:
   DotNetVersion: 7.0.100
   VersionName: $[replace(variables['Build.SourceBranchName'], 'refs/heads/release/', '')]
   buildConfiguration: 'Release'
-  OutputFolder: '$(build.artifactStagingDirectory)\AppxPackages\\'
+  OutputFolder: '$(build.artifactStagingDirectory)\Packages\\'
 
 steps: 
 
@@ -36,35 +36,17 @@ steps:
   inputs:
     solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
     configuration: 'Release'
-    msbuildArgs: '/p:TargetFramework=netstandard2.0 /t:publish;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
- 
-- task: MSBuild@1
-  inputs:
-    solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
-    configuration: 'Release'
-    msbuildArgs: '/p:TargetFramework=Xamarin.iOS10 /t:publish;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
-    
-- task: MSBuild@1
-  inputs:
-    solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
-    configuration: 'Release'
-    msbuildArgs: '/p:TargetFramework=MonoAndroid10.0 /t:publish;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
-    
-- task: MSBuild@1
-  inputs:
-    solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
-    configuration: 'Release'
-    msbuildArgs: '/p:TargetFramework=uap10.0.19041 /t:publish;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
-
+    msbuildArgs: '/p:TargetFramework=netstandard2.0 /t:build /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
+  
 - task: Bash@3
   displayName: Build
   inputs:
     targetType: 'inline'
     script: |  
-        #dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f netstandard2.0 -c Release -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f uap10.0.19041 -c Release -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f MonoAndroid10.0 -c Release -o $(build.sourcesdirectory) 
-        #dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f Xamarin.iOS10 -c Release -o $(build.sourcesdirectory) 
+        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f netstandard2.0 -c Release -o $(build.sourcesdirectory) --no-build
+        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f uap10.0.19041 -c Release -o $(build.sourcesdirectory) --no-build
+        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f MonoAndroid10.0 -c Release -o $(build.sourcesdirectory) --no-build
+        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f Xamarin.iOS10 -c Release -o $(build.sourcesdirectory) --no-build
         dotnet publish ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -f netstandard2.0 -c Release -o $(OutputFolder) 
         dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0 -c Release -o $(OutputFolder) 
         dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-ios -c Release -o $(OutputFolder) 
@@ -79,7 +61,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: | 
-        #dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
         dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
         dotnet pack ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
         dotnet pack ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
