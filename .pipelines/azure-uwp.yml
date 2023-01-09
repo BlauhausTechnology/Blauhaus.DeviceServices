@@ -31,7 +31,7 @@ steps:
   inputs:
     solution: './src/Blauhaus.DeviceServices.sln'
     #solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
-    configuration: 'Release'
+    configuration: '$(buildConfiguration)'
     msbuildArgs: '/t:restore;build /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
   
 #- task: Bash@3
