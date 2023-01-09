@@ -32,7 +32,7 @@ steps:
     solution: './src/Blauhaus.DeviceServices.sln'
     #solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/t:restore;build /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
+    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
   
 #- task: Bash@3
 #  displayName: Build
@@ -73,7 +73,7 @@ steps:
 - task: NuGetCommand@2
   inputs:
     command: 'push'
-    packagesToPush: '$(build.sourcesdirectory)/**/*.nupkg;!$(build.sourcesdirectory)/**/*.symbols.nupkg'
+    packagesToPush: '$(OutputFolder)/**/*.nupkg;!$(OutputFolder)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'Blauhaus Nuget'
 
