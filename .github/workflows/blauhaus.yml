@@ -61,7 +61,7 @@ jobs:
      - name: Add MSBuild to PATH
        uses: microsoft/setup-msbuild@v1.0.2
      - name: MS Build
-       run: msbuild /m /p:Configuration=Release_Xamarin /p:Version=${VERSION_NAME} ./src/Blauhaus.DeviceServices.sln
+       run: msbuild /m /p:Configuration=Release_Xamarin /t:restore /p:Version=${VERSION_NAME} ./src/Blauhaus.DeviceServices.sln
          
      - name: Deploy NuGet Package
        run: |
