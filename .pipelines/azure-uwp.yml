@@ -20,19 +20,19 @@ steps:
     version: '$(DotNetVersion)'
      
 - task: VSBuild@1
-  displayName: Build Client
-  inputs:
-    solution: './src/Blauhaus.DeviceServices.sln'
-    configuration: 'Release_Xamarin'
-    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
-    
-- task: VSBuild@1
   displayName: Build MAUI
   inputs:
     solution: './src/Blauhaus.DeviceServices.sln'
     configuration: 'Release'
     msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
         
+- task: VSBuild@1
+  displayName: Build Client
+  inputs:
+    solution: './src/Blauhaus.DeviceServices.sln'
+    configuration: 'Release_Xamarin'
+    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
+    
 - task: NuGetCommand@2
   inputs:
     command: 'push'
