@@ -20,19 +20,19 @@ steps:
     packageType: 'sdk'
     version: '$(DotNetVersion)'
 
-- task: Bash@3
-  displayName: Restore nuget
-  inputs:
-    targetType: 'inline'
-    script: |
-        dotnet restore '$(solution)' -p:PublishReadyToRun=true -c $(buildConfiguration)
+#- task: Bash@3
+#  displayName: Restore nuget
+#  inputs:
+#    targetType: 'inline'
+#    script: |
+#        dotnet restore '$(solution)' -p:PublishReadyToRun=true -c $(buildConfiguration)
 
 - task: VSBuild@1
   inputs:
     solution: './src/Blauhaus.DeviceServices.sln'
     #solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
     configuration: 'Release'
-    msbuildArgs: '/t:build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
+    msbuildArgs: '/t:restore;build /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
   
 #- task: Bash@3
 #  displayName: Build
