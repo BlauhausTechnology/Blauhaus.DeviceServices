@@ -19,48 +19,20 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '$(DotNetVersion)'
-
-#- task: Bash@3
-#  displayName: Restore nuget
-#  inputs:
-#    targetType: 'inline'
-#    script: |
-#        dotnet restore '$(solution)' -p:PublishReadyToRun=true -c $(buildConfiguration)
-
+     
 - task: VSBuild@1
+  displayName: Build Client
   inputs:
     solution: './src/Blauhaus.DeviceServices.sln'
-    #solution: './src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj'
-    configuration: '$(buildConfiguration)'
+    configuration: 'Release_Xamarin'
     msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
-  
-#- task: Bash@3
-#  displayName: Build
-#  inputs:
-#    targetType: 'inline'
-#    script: |  
-#        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f netstandard2.0 -c Release -o $(OutputFolder) --no-build
-#        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f uap10.0.19041 -c Release -o $(OutputFolder) --no-build
-#        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f MonoAndroid10.0 -c Release -o $(OutputFolder) --no-build
-#        dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f Xamarin.iOS10 -c Release -o $(OutputFolder) --no-build
-#        dotnet publish ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -f netstandard2.0 -c Release -o $(OutputFolder) --no-restore
-#        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0 -c Release -o $(OutputFolder) --no-restore
-#        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-ios -c Release -o $(OutputFolder) --no-restore
-#        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-android -c Release -o $(OutputFolder) --no-restore
-#        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-windows10.0.19041 -c Release  -o $(OutputFolder) --no-restore
-#        dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-maccatalyst -c Release  -o $(OutputFolder) --no-restore
-#        dotnet publish ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -f net7.0 -c Release -o $(OutputFolder) --no-restore
-#        dotnet publish ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -f net7.0  -c Release -o $(OutputFolder) --no-restore
-
-#- task: Bash@3
-#  displayName: Pack
-#  inputs:
-#    targetType: 'inline'
-#    script: | 
-#        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
-#        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
-#        dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
-
+    
+- task: VSBuild@1
+  displayName: Build Maui and Blazor
+  inputs:
+    solution: './src/Blauhaus.DeviceServices.sln'
+    configuration: 'Release'
+    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
         
 - task: Bash@3
   displayName: List

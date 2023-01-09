@@ -24,7 +24,7 @@ jobs:
      - name: Build NuGet Package
        run: |
         #dotnet build ./src/Blauhaus.DeviceServices.sln --configuration Release
-        nuget restore ./src/Blauhaus.DeviceServices.sln -p:PackageReadyToRun=true
+        nuget restore ./src/Blauhaus.DeviceServices.sln -p:PublishReadyToRun=true
         dotnet build ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f netstandard2.0 -c Release 
         dotnet build ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -f netstandard2.0 -c Release 
         dotnet build ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0 -c Release 
