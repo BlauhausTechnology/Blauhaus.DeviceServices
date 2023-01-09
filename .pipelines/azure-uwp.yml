@@ -7,7 +7,7 @@ pool:
 variables:
   solution: 'src\Blauhaus.DeviceServices.sln'
   buildPlatform: 'Any CPU'
-  DotNetVersion: 7.0.100
+  DotNetVersion: 7.x
   VersionName: $[replace(variables['Build.SourceBranchName'], 'refs/heads/release/', '')]
   OutputFolder: '$(build.artifactStagingDirectory)'
 
@@ -19,6 +19,11 @@ steps:
     packageType: 'sdk'
     version: '$(DotNetVersion)'
    
+- task: CmdLine@2
+  displayName: Install MAUI
+  inputs:
+    script: 'dotnet workload install maui'
+
 - task: Bash@3
   displayName: Restore nuget
   inputs:
@@ -32,11 +37,6 @@ steps:
     solution: './src/Blauhaus.DeviceServices.sln'
     configuration: 'Release_Xamarin'
     msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
-    
-- task: CmdLine@2
-  displayName: Install MAUI
-  inputs:
-    script: 'dotnet workload install maui'
 
 - task: VSBuild@1
   displayName: Build MAUI
