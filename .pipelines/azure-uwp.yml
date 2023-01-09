@@ -1,5 +1,5 @@
 trigger:
-- release/-
+- release/*
 
 pool:
   vmImage: 'windows-2022'
@@ -26,22 +26,7 @@ steps:
     solution: './src/Blauhaus.DeviceServices.sln'
     configuration: 'Release_Xamarin'
     msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
-    
-- task: VSBuild@1
-  displayName: Build Maui and Blazor
-  inputs:
-    solution: './src/Blauhaus.DeviceServices.sln'
-    configuration: 'Release'
-    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
         
-- task: Bash@3
-  displayName: List
-  inputs:
-    targetType: 'inline'
-    script: |
-        cd $(OutputFolder)
-        ls
-
 - task: NuGetCommand@2
   inputs:
     command: 'push'
