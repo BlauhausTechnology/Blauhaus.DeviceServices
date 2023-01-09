@@ -57,10 +57,10 @@ jobs:
      - name: MS Build
        run: | 
          echo ${env:OutputPath}
-         msbuild /m /p:Configuration=${env:Configuration} /restore /p:Version=${env:VERSION_NAME} /p:PackageOutputPath=${env:OutputPath} ${env:SolutionPath}
+         msbuild /m /p:Configuration=${env:Configuration} /restore /p:Version=${env:VERSION_NAME} /p:PackageOutputPath=${env:GITHUB_WORKSPACE} ${env:SolutionPath}
 
      - name: Deploy NuGet Package
        run: |
-         dotnet nuget push ${env:OutputPath}/Blauhaus.DeviceServices.Xamarin.${env:VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+         dotnet nuget push ${env:GITHUB_WORKSPACE}/Blauhaus.DeviceServices.Xamarin.${env:VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
 
    
