@@ -33,13 +33,13 @@ jobs:
         dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0-maccatalyst -c Release  
         dotnet publish ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -f net7.0 -c Release 
         dotnet publish ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -f net7.0  -c Release 
-     - name: Pack NuGet Packages
-       run: | 
-        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
-        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
-        dotnet pack ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
-        dotnet pack ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
-        dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
+     #- name: Pack NuGet Packages
+     #  run: | 
+     #   dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
+     #   dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
+     #   dotnet pack ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
+     #   dotnet pack ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
+     #   dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
         
      - name: Deploy NuGet Package
        run: |
