@@ -2,12 +2,12 @@ name: Blauhaus Packages
 on:
   push:
     branches:
-    - release/-
+    - release/*
 
 jobs:
 
   build:
-     runs-on: macos-latest
+     runs-on: windows-latest
      steps:
      - uses: actions/checkout@v2
      - uses: actions/setup-dotnet@v1
