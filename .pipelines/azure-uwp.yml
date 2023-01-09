@@ -10,7 +10,7 @@ variables:
   DotNetVersion: 7.0.100
   VersionName: $[replace(variables['Build.SourceBranchName'], 'refs/heads/release/', '')]
   buildConfiguration: 'Release'
-  OutputFolder: '$(build.artifactStagingDirectory)\Packages\\'
+  OutputFolder: '$(build.artifactStagingDirectory)/Packages'
 
 steps: 
 
