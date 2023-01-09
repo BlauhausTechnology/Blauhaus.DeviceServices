@@ -25,7 +25,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-        dotnet restore '$(solution)' -p:PublishReadyToRun=true
+        dotnet restore '$(solution)' -p:PublishReadyToRun=true -c $(buildConfiguration)
 
 - task: VSBuild@1
   inputs:
