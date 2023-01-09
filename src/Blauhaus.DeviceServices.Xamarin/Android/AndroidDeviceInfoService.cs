@@ -17,7 +17,7 @@ namespace Blauhaus.DeviceServices.Android
                     _modelName = GetDroidModel.DeviceHardware.GetModel(defaultValue: "Unknown", includeManufacturer: true);
                     if (_modelName == "Unknown")
                     {
-                        _modelName = Xamarin.Essentials.DeviceInfo.Model;
+                        //_modelName = Xamarin.Essentials.DeviceInfo.Model;
                     }
                 }
                 return _modelName;

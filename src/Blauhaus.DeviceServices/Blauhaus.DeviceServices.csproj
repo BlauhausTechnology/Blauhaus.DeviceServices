@@ -11,7 +11,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Blauhaus.Common.Utils" Version="2.2.8" />
-		<PackageReference Include="Blauhaus.Ioc.Abstractions" Version="1.5.1" />
+		<PackageReference Include="Blauhaus.Ioc.Abstractions" Version="1.5.2" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
