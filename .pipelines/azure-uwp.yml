@@ -18,7 +18,12 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '$(DotNetVersion)'
-     
+   
+- task: CmdLine@2
+  displayName: Install MAUI
+  inputs:
+    script: 'dotnet workload install maui'
+
 - task: VSBuild@1
   displayName: Build MAUI
   inputs:
