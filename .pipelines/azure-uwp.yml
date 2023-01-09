@@ -9,7 +9,6 @@ variables:
   buildPlatform: 'Any CPU'
   DotNetVersion: 7.0.100
   VersionName: $[replace(variables['Build.SourceBranchName'], 'refs/heads/release/', '')]
-  buildConfiguration: 'Release_Xamarin'
   OutputFolder: '$(build.artifactStagingDirectory)'
 
 steps:  
@@ -25,6 +24,13 @@ steps:
   inputs:
     solution: './src/Blauhaus.DeviceServices.sln'
     configuration: 'Release_Xamarin'
+    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
+    
+- task: VSBuild@1
+  displayName: Build MAUI
+  inputs:
+    solution: './src/Blauhaus.DeviceServices.sln'
+    configuration: 'Release'
     msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
         
 - task: NuGetCommand@2
