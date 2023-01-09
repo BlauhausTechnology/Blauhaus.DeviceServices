@@ -38,7 +38,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-        dotnet restore '$(solution)' 
+        dotnet restore '$(solution)' -p:PublishReadyToRun=true
 
 - task: VSBuild@1
   inputs:
