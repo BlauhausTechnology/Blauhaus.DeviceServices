@@ -19,6 +19,20 @@ steps:
     packageType: 'sdk'
     version: '$(DotNetVersion)'
    
+- task: Bash@3
+  displayName: Restore nuget
+  inputs:
+    targetType: 'inline'
+    script: |
+        dotnet restore '$(solution)' -p:PublishReadyToRun=true
+
+- task: VSBuild@1
+  displayName: Build Client
+  inputs:
+    solution: './src/Blauhaus.DeviceServices.sln'
+    configuration: 'Release_Xamarin'
+    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
+    
 - task: CmdLine@2
   displayName: Install MAUI
   inputs:
@@ -30,14 +44,7 @@ steps:
     solution: './src/Blauhaus.DeviceServices.sln'
     configuration: 'Release'
     msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
-        
-- task: VSBuild@1
-  displayName: Build Client
-  inputs:
-    solution: './src/Blauhaus.DeviceServices.sln'
-    configuration: 'Release_Xamarin'
-    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
-    
+
 - task: NuGetCommand@2
   inputs:
     command: 'push'
