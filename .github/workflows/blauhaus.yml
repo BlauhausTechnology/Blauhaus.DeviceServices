@@ -5,8 +5,7 @@ on:
     - release/*
 
 env:
-  SolutionPath: ./src/Blauhaus.DeviceServices.sln
-  OutputPath: ./output
+    SolutionPath: ./src/Blauhaus.DeviceServices.sln
   
 jobs:
   
@@ -29,16 +28,17 @@ jobs:
          dotnet workload install maui --ignore-failed-sources  
      - name: Build NuGet Package
        run: |
-         dotnet build $SolutionPath --configuration $Configuration -p:Version=$VERSION_NAME -o $OutputPath
+         dotnet build $SolutionPath --configuration $Configuration -p:Version=$VERSION_NAME
         
      - name: Deploy NuGet Package
        run: |
-         dotnet nuget push $OutputPath/*.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+         dotnet nuget push **/*.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
 
   build_windows:
      runs-on: windows-latest
      env:  
        Configuration: 'Release_Xamarin'
+       OutputPath: ./output
 
      steps:
 
@@ -57,7 +57,7 @@ jobs:
      - name: MS Build
        run: | 
          echo ${env:OutputPath}
-         msbuild /m /p:Configuration=${env:Configuration} /t:restore /p:Version=${env:VERSION_NAME} /p:PackageOutputPath=${env:OutputPath} ${env:SolutionPath}
+         msbuild /m /p:Configuration=${env:Configuration} /t:restore;pack /p:Version=${env:VERSION_NAME} /p:PackageOutputPath=${env:OutputPath} ${env:SolutionPath}
 
      - name: Deploy NuGet Package
        run: |
