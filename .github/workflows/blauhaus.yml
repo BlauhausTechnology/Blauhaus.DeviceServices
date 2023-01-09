@@ -2,12 +2,12 @@ name: Blauhaus Packages
 on:
   push:
     branches:
-    - release/-
+    - release/*
 
 jobs:
 
   build:
-     runs-on: windows-latest
+     runs-on: macos-latest
      steps:
      - uses: actions/checkout@v2
      - uses: actions/setup-dotnet@v1
@@ -24,6 +24,7 @@ jobs:
      - name: Build NuGet Package
        run: |
         #dotnet build ./src/Blauhaus.DeviceServices.sln --configuration Release
+        nuget build ./src/Blauhaus.DeviceServices.sln -p:PackageReadyToRun=true
         dotnet publish ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -f netstandard2.0 -c Release 
         dotnet publish ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -f netstandard2.0 -c Release 
         dotnet publish ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -f net7.0 -c Release 
