@@ -57,7 +57,7 @@ jobs:
      - name: MS Build
        run: | 
          echo ${env:OutputPath}
-         msbuild /m /p:Configuration=${env:Configuration} /t:restore;pack /p:Version=${env:VERSION_NAME} /p:PackageOutputPath=${env:OutputPath} ${env:SolutionPath}
+         msbuild /m /p:Configuration=${env:Configuration} /t:pack /restore /p:Version=${env:VERSION_NAME} /p:PackageOutputPath=${env:OutputPath} ${env:SolutionPath}
 
      - name: Deploy NuGet Package
        run: |
