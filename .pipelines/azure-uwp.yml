@@ -1,5 +1,5 @@
 trigger:
-- release/-
+- release/*
 
 pool:
   vmImage: 'windows-2022'
@@ -19,17 +19,17 @@ steps:
     packageType: 'sdk'
     version: '$(DotNetVersion)'
    
-- task: CmdLine@2
-  displayName: Install MAUI
-  inputs:
-    script: 'dotnet workload install maui'
+#- task: CmdLine@2
+#  displayName: Install MAUI
+#  inputs:
+#    script: 'dotnet workload install maui'
 
 - task: Bash@3
   displayName: Restore nuget
   inputs:
     targetType: 'inline'
     script: |
-        dotnet restore '$(solution)' -p:PublishReadyToRun=true
+        dotnet restore '(Release_Xamarin)' -p:PublishReadyToRun=true
 
 - task: VSBuild@1
   displayName: Build Client
@@ -38,12 +38,12 @@ steps:
     configuration: 'Release_Xamarin'
     msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
 
-- task: VSBuild@1
-  displayName: Build MAUI
-  inputs:
-    solution: './src/Blauhaus.DeviceServices.sln'
-    configuration: 'Release'
-    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
+#- task: VSBuild@1
+#  displayName: Build MAUI
+#  inputs:
+#    solution: './src/Blauhaus.DeviceServices.sln'
+#    configuration: 'Release'
+#    msbuildArgs: '/t:restore;build;pack /p:Version=$(VersionName) /p:PackageOutputPath=$(OutputFolder)'
 
 - task: NuGetCommand@2
   inputs:

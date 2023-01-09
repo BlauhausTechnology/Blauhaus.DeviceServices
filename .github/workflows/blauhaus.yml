@@ -23,7 +23,7 @@ jobs:
         node ./scripts/getversion.js
      - name: Build NuGet Package
        run: |
-        nuget restore ./src/Blauhaus.DeviceServices.sln -p:PublishReadyToRun=true
+        #nuget restore ./src/Blauhaus.DeviceServices.sln -p:PublishReadyToRun=true
         dotnet build ./src/Blauhaus.DeviceServices.sln --configuration Release 
      - name: Pack NuGet Packages
        run: | 
