@@ -52,14 +52,14 @@ steps:
 #        dotnet publish ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -f net7.0 -c Release -o $(OutputFolder) --no-restore
 #        dotnet publish ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -f net7.0  -c Release -o $(OutputFolder) --no-restore
 
-- task: Bash@3
-  displayName: Pack
-  inputs:
-    targetType: 'inline'
-    script: | 
-        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
-        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
-        dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
+#- task: Bash@3
+#  displayName: Pack
+#  inputs:
+#    targetType: 'inline'
+#    script: | 
+#        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
+#        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
+#        dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
 
         
 - task: Bash@3
