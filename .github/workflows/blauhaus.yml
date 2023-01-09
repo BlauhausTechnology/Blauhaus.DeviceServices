@@ -27,6 +27,8 @@ jobs:
         dotnet build ./src/Blauhaus.DeviceServices.sln --configuration Release 
      - name: Pack NuGet Packages
        run: | 
+        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
+        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
         dotnet pack ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
         dotnet pack ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
         dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
@@ -34,7 +36,6 @@ jobs:
      - name: Deploy NuGet Package
        run: |
         dotnet nuget push /Users/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.Abstractions.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
-        dotnet nuget push /Users/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.Xamarin.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
         dotnet nuget push /Users/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
         dotnet nuget push /Users/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.Maui.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
         dotnet nuget push /Users/runner/work/Blauhaus.DeviceServices/Blauhaus.DeviceServices/Blauhaus.DeviceServices.Blazor.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
