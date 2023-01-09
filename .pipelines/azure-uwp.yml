@@ -1,5 +1,5 @@
 trigger:
-- release/-
+- release/*
 
 pool:
   vmImage: 'windows-2022'
@@ -9,29 +9,16 @@ variables:
   buildPlatform: 'Any CPU'
   DotNetVersion: 7.0.100
   VersionName: $[replace(variables['Build.SourceBranchName'], 'refs/heads/release/', '')]
-  buildConfiguration: 'Release'
+  buildConfiguration: 'Release_Xamarin'
   OutputFolder: '$(build.artifactStagingDirectory)'
 
-steps: 
-
-- task: Bash@3
-  displayName: List
-  inputs:
-    targetType: 'inline'
-    script: |
-        cd $(OutputFolder)
-        ls
+steps:  
 
 - task: UseDotNet@2
   displayName: .NET Version
   inputs:
     packageType: 'sdk'
     version: '$(DotNetVersion)'
-
-- task: CmdLine@2
-  displayName: Install MAUI
-  inputs:
-    script: 'dotnet workload install maui'
 
 - task: Bash@3
   displayName: Restore nuget
@@ -65,16 +52,14 @@ steps:
 #        dotnet publish ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -f net7.0 -c Release -o $(OutputFolder) --no-restore
 #        dotnet publish ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -f net7.0  -c Release -o $(OutputFolder) --no-restore
 
-#- task: Bash@3
-#  displayName: Pack
-#  inputs:
-#    targetType: 'inline'
-#    script: | 
-#        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
-#        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
-#        dotnet pack ./src/Blauhaus.DeviceServices.Maui/Blauhaus.DeviceServices.Maui.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
-#        dotnet pack ./src/Blauhaus.DeviceServices.Blazor/Blauhaus.DeviceServices.Blazor.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
-#        dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
+- task: Bash@3
+  displayName: Pack
+  inputs:
+    targetType: 'inline'
+    script: | 
+        dotnet pack ./src/Blauhaus.DeviceServices/Blauhaus.DeviceServices.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices.Abstractions/Blauhaus.DeviceServices.Abstractions.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
+        dotnet pack ./src/Blauhaus.DeviceServices.TestHelpers/Blauhaus.DeviceServices.TestHelpers.csproj -c Release -o $(OutputFolder) -p:PackageVersion=$(VersionName) --no-build
 
         
 - task: Bash@3
