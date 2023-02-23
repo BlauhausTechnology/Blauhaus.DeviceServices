@@ -102,6 +102,8 @@ namespace Blauhaus.DeviceServices.Maui
             {
                 try
                 {
+                    _logger.LogDebug("Requesting permission {DevicePermission}", typeof(T).Name);
+
                     var permissionStatus = await Permissions.RequestAsync<T>();
 
                     if (permissionStatus == PermissionStatus.Granted)
@@ -132,6 +134,8 @@ namespace Blauhaus.DeviceServices.Maui
             {
                 try
                 {
+                    _logger.LogDebug("Checking permission {DevicePermission}", typeof(T).Name);
+
                     var permissionStatus = await Permissions.CheckStatusAsync<T>();
                     if (permissionStatus == PermissionStatus.Granted)
                     {
