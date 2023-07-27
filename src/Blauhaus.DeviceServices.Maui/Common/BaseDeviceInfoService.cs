@@ -88,10 +88,15 @@ public abstract class BaseDeviceInfoService : IDeviceInfoService
             _deviceId = await SecureStorage.GetAsync(DeviceKey);
             if (string.IsNullOrEmpty(_deviceId))
             {
-                _deviceId = Guid.NewGuid().ToString();
+                _deviceId = GetDeviceIdForPlatform();
                 await SecureStorage.SetAsync(DeviceKey, _deviceId);
             }
         }
         return _deviceId;
+    }
+
+    protected virtual string? GetDeviceIdForPlatform()
+    {
+        return Guid.NewGuid().ToString();
     }
 }
