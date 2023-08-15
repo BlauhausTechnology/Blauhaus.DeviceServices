@@ -41,5 +41,9 @@
 	  <None Include="Common\.Ioc\IocServiceExtensions.cs" />
 	  <None Include="Common\.Ioc\ServiceCollectionExtensions.cs" />
 	</ItemGroup>
+ 
+	<ItemGroup>
+	  <Folder Include="Common\Share\" />
+	</ItemGroup>
 
 </Project>
