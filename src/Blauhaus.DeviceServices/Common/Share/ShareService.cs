@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Blauhaus.Analytics.Abstractions;
 using Blauhaus.Analytics.Abstractions.Extensions;
+using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
 using Blauhaus.DeviceServices.Abstractions.Share;
 using Blauhaus.Errors;
 using Blauhaus.Responses;
@@ -14,10 +15,14 @@ namespace Blauhaus.DeviceServices.Common.Share;
 public class ShareService : IShareService
 {
     private readonly IAnalyticsLogger<ShareService> _logger;
+    private readonly IDeviceInfoService _deviceInfo;
 
-    public ShareService(IAnalyticsLogger<ShareService> logger)
+    public ShareService(
+        IAnalyticsLogger<ShareService> logger,
+        IDeviceInfoService deviceInfo)
     {
         _logger = logger;
+        _deviceInfo = deviceInfo;
     }
 
 
@@ -28,7 +33,7 @@ public class ShareService : IShareService
         {
             _logger.LogDebug("Processing share request for {FileName} with title {Title}", filename, title);
             
-            string filePath = Path.Combine(FileSystem.CacheDirectory, filename);
+            string filePath = Path.Combine(_deviceInfo.AppDataFolder, filename);
             _logger.LogDebug("Set file path as {Path}", filePath);
 
             File.WriteAllBytes(filePath, fileBytes);
