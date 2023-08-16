@@ -32,8 +32,8 @@ public class ShareService : IShareService
             _logger.LogDebug("Set file path as {Path}", filePath);
 
             File.WriteAllBytes(filePath, fileBytes);
-            string? mimeType = filename.EndsWith(".pdf") ? "" : null;
-            var fileToShare = new ShareFile(filePath,  "application/pdf");
+            string? mimeType = filename.EndsWith(".pdf") ? "application/pdf" : null;
+            var fileToShare = new ShareFile(filePath, mimeType);
             _logger.LogDebug("Wrote bytes to file as content type {ContentType}", fileToShare.ContentType);
 
             await Xamarin.Essentials.Share.RequestAsync(new ShareFileRequest
