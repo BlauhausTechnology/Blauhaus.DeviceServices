@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Blauhaus.Analytics.Abstractions;
 using Blauhaus.Analytics.Abstractions.Extensions;
 using Blauhaus.Analytics.Abstractions.Service;
 using Blauhaus.Common.Utils.Disposables;
 using Blauhaus.DeviceServices.Abstractions.Connectivity;
+using Microsoft.Extensions.Logging;
 using Xamarin.Essentials;
 
 namespace Blauhaus.DeviceServices.Common.Connectivity
 {
     public class ConnectivityService : BasePublisher, IConnectivityService
     {
-        private readonly IAnalyticsService _analyticsService;
+        private readonly IAnalyticsLogger<ConnectivityService> _logger;
         private ConnectionAccess _previousNetworkAccess = ConnectionAccess.Unknown;
 
-        public ConnectivityService(IAnalyticsService analyticsService)
+        public ConnectivityService(IAnalyticsLogger<ConnectivityService> logger)
         {
-            _analyticsService = analyticsService;
+            _logger = logger;
 
             Xamarin.Essentials.Connectivity.ConnectivityChanged += HandleConnectivityChanged;
         }
@@ -45,7 +47,9 @@ namespace Blauhaus.DeviceServices.Common.Connectivity
             var newConnectionState = GetState();
             if (newConnectionState.Access != _previousNetworkAccess)
             {
-                _analyticsService.Trace(this, $"Network access changed from {_previousNetworkAccess} to {newConnectionState.Access}", LogSeverity.Verbose, newConnectionState.Types.ToObjectDictionary());
+                _logger.LogDebug("Network access changed from {PreviousAccess} to {NewAccess}", 
+                    _previousNetworkAccess, newConnectionState.Access);
+
                 await UpdateSubscribersAsync(newConnectionState);
                 _previousNetworkAccess = newConnectionState.Access;
             }
