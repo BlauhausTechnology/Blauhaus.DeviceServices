@@ -3,6 +3,7 @@ using Blauhaus.Common.ValueObjects.RuntimePlatforms;
 using Blauhaus.DeviceServices.Abstractions.Application;
 using Blauhaus.DeviceServices.Abstractions.Connectivity;
 using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
+using Blauhaus.DeviceServices.Abstractions.Haptics;
 using Blauhaus.DeviceServices.Abstractions.Permissions;
 using Blauhaus.DeviceServices.Abstractions.SecureStorage;
 using Blauhaus.DeviceServices.Abstractions.Thread;
@@ -22,6 +23,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ISecureStorageService, SecureStorageService>();
         services.AddSingleton<IKeyValueStore>(sp => sp.GetRequiredService<ISecureStorageService>());
         services.AddSingleton<IThreadService, ThreadService>();
+        services.AddSingleton<IHapticFeedbackService, HapticFeedbackService>();
         
 
 #if IOS

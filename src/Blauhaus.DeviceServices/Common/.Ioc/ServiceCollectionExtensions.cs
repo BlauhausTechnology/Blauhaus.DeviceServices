@@ -1,11 +1,13 @@
 ﻿using Blauhaus.DeviceServices.Abstractions.Application;
 using Blauhaus.DeviceServices.Abstractions.Connectivity;
+using Blauhaus.DeviceServices.Abstractions.Haptics;
 using Blauhaus.DeviceServices.Abstractions.Permissions;
 using Blauhaus.DeviceServices.Abstractions.SecureStorage;
 using Blauhaus.DeviceServices.Abstractions.Share;
 using Blauhaus.DeviceServices.Abstractions.Thread;
 using Blauhaus.DeviceServices.Common.Application;
 using Blauhaus.DeviceServices.Common.Connectivity;
+using Blauhaus.DeviceServices.Common.Haptics;
 using Blauhaus.DeviceServices.Common.Permissions;
 using Blauhaus.DeviceServices.Common.SecureStorage;
 using Blauhaus.DeviceServices.Common.Share;
@@ -25,6 +27,7 @@ namespace Blauhaus.DeviceServices.Common.Ioc
             services.AddSingleton<IConnectivityService, ConnectivityService>();
             services.AddSingleton<IDevicePermissionsService, DevicePermissionsService>();
             services.AddSingleton<IShareService, ShareService>();
+            services.AddSingleton<IHapticFeedbackService, HapticFeebackService>();
             return services;
         }
     }
