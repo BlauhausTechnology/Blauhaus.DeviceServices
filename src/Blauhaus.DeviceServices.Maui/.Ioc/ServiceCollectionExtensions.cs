@@ -6,7 +6,9 @@ using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
 using Blauhaus.DeviceServices.Abstractions.Haptics;
 using Blauhaus.DeviceServices.Abstractions.Permissions;
 using Blauhaus.DeviceServices.Abstractions.SecureStorage;
+using Blauhaus.DeviceServices.Abstractions.Share;
 using Blauhaus.DeviceServices.Abstractions.Thread;
+using Blauhaus.DeviceServices.Maui.Common;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Blauhaus.DeviceServices.Maui.Ioc;
@@ -24,6 +26,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IKeyValueStore>(sp => sp.GetRequiredService<ISecureStorageService>());
         services.AddSingleton<IThreadService, ThreadService>();
         services.AddSingleton<IHapticFeedbackService, HapticFeedbackService>();
+        services.AddSingleton<IShareService, ShareService>();
         
 
 #if IOS
