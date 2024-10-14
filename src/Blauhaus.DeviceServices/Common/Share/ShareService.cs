@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Blauhaus.Analytics.Abstractions;
-using Blauhaus.Analytics.Abstractions.Extensions;
 using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
 using Blauhaus.DeviceServices.Abstractions.Share;
 using Blauhaus.Errors;
@@ -14,11 +12,11 @@ namespace Blauhaus.DeviceServices.Common.Share;
 
 public class ShareService : IShareService
 {
-    private readonly IAnalyticsLogger<ShareService> _logger;
+    private readonly ILogger<ShareService> _logger;
     private readonly IDeviceInfoService _deviceInfo;
 
     public ShareService(
-        IAnalyticsLogger<ShareService> logger,
+        ILogger<ShareService> logger,
         IDeviceInfoService deviceInfo)
     {
         _logger = logger;
@@ -50,7 +48,7 @@ public class ShareService : IShareService
         catch (Exception e)
         {
             var error = Error.Unexpected("Failed to share file!");
-            _logger.LogError(error, e);
+            _logger.LogError(e, error.ToString());
             return Response.Failure(error);
         }
 

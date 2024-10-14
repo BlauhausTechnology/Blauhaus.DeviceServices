@@ -1,6 +1,4 @@
-﻿using Blauhaus.Analytics.Abstractions;
-using Blauhaus.Analytics.Abstractions.Extensions;
-using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
+﻿using Blauhaus.DeviceServices.Abstractions.DeviceInfo;
 using Blauhaus.DeviceServices.Abstractions.Share;
 using Blauhaus.Errors;
 using Blauhaus.Responses;
@@ -10,11 +8,11 @@ namespace Blauhaus.DeviceServices.Maui.Common;
 
 public class ShareService : IShareService
 {
-    private readonly IAnalyticsLogger<ShareService> _logger;
+    private readonly ILogger<ShareService> _logger;
     private readonly IDeviceInfoService _deviceInfo;
 
     public ShareService(
-        IAnalyticsLogger<ShareService> logger,
+        ILogger<ShareService> logger,
         IDeviceInfoService deviceInfo)
     {
         _logger = logger;
@@ -46,7 +44,7 @@ public class ShareService : IShareService
         catch (Exception e)
         {
             var error = Error.Unexpected("Failed to share file!");
-            _logger.LogError(error, e);
+            _logger.LogError(e, error.Description);
             return Response.Failure(error);
         }
 

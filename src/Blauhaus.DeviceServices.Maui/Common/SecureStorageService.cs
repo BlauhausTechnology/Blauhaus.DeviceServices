@@ -1,14 +1,13 @@
-﻿using Blauhaus.Analytics.Abstractions;
-using Blauhaus.DeviceServices.Abstractions.SecureStorage;
+﻿using Blauhaus.DeviceServices.Abstractions.SecureStorage;
 using Microsoft.Extensions.Logging;
 
 namespace Blauhaus.DeviceServices.Maui
 {
     public class SecureStorageService : ISecureStorageService
     {
-        private readonly IAnalyticsLogger<SecureStorageService> _logger;
+        private readonly ILogger<SecureStorageService> _logger;
 
-        public SecureStorageService(IAnalyticsLogger<SecureStorageService> logger)
+        public SecureStorageService(ILogger<SecureStorageService> logger)
         {
             _logger = logger;
         }

@@ -37,7 +37,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.80" />
+		<PackageReference Include="Blauhaus.Common.Utils" Version="2.4.4" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.91" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -53,11 +54,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.80" />
+	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.91" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
+	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.91" />
 	</ItemGroup>
  
 </Project>

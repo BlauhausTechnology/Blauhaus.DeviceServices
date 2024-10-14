@@ -1,6 +1,4 @@
-﻿using Blauhaus.Analytics.Abstractions;
-using Blauhaus.Analytics.Abstractions.Extensions;
-using Blauhaus.Analytics.Abstractions.Service;
+﻿using Blauhaus.DeviceServices.Abstractions.Extensions;
 using Blauhaus.DeviceServices.Abstractions.Permissions;
 using Blauhaus.DeviceServices.Abstractions.Thread;
 using Blauhaus.Responses;
@@ -10,11 +8,11 @@ namespace Blauhaus.DeviceServices.Maui
 {
     public class DevicePermissionsService : IDevicePermissionsService
     {
-        private readonly IAnalyticsLogger<DevicePermissionsService> _logger;
+        private readonly ILogger<DevicePermissionsService> _logger;
         private readonly IThreadService _threadService;
 
         public DevicePermissionsService(
-            IAnalyticsLogger<DevicePermissionsService> logger,
+            ILogger<DevicePermissionsService> logger,
             IThreadService threadService)
         {
             _logger = logger;

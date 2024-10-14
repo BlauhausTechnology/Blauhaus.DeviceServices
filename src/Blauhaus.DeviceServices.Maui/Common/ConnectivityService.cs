@@ -1,7 +1,4 @@
-﻿using Blauhaus.Analytics.Abstractions;
-using Blauhaus.Analytics.Abstractions.Extensions;
-using Blauhaus.Analytics.Abstractions.Service;
-using Blauhaus.Common.Utils.Disposables;
+﻿using Blauhaus.Common.Utils.Disposables;
 using Blauhaus.DeviceServices.Abstractions.Connectivity;
 using Blauhaus.DeviceServices.Abstractions.Thread;
 using Microsoft.Extensions.Logging;
@@ -10,7 +7,7 @@ namespace Blauhaus.DeviceServices.Maui
 {
     public class ConnectivityService : BasePublisher, IConnectivityService
     {
-        private readonly IAnalyticsLogger<ConnectivityService> _logger;
+        private readonly ILogger<ConnectivityService> _logger;
         private readonly IThreadService _threadService;
         private ConnectionAccess _previousNetworkAccess = ConnectionAccess.Unknown;
         
@@ -18,7 +15,7 @@ namespace Blauhaus.DeviceServices.Maui
         private ConnectionState? _currentState;
 
         public ConnectivityService(
-            IAnalyticsLogger<ConnectivityService> logger,
+            ILogger<ConnectivityService> logger,
             IThreadService threadService)
         {
             _logger = logger;

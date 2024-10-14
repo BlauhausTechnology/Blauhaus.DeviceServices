@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Blauhaus.Analytics.Abstractions;
-using Blauhaus.Analytics.Abstractions.Extensions;
-using Blauhaus.Analytics.Abstractions.Service;
 using Blauhaus.Common.Utils.Disposables;
 using Blauhaus.DeviceServices.Abstractions.Connectivity;
 using Microsoft.Extensions.Logging;
@@ -13,10 +10,10 @@ namespace Blauhaus.DeviceServices.Common.Connectivity
 {
     public class ConnectivityService : BasePublisher, IConnectivityService
     {
-        private readonly IAnalyticsLogger<ConnectivityService> _logger;
+        private readonly ILogger<ConnectivityService> _logger;
         private ConnectionAccess _previousNetworkAccess = ConnectionAccess.Unknown;
 
-        public ConnectivityService(IAnalyticsLogger<ConnectivityService> logger)
+        public ConnectivityService(ILogger<ConnectivityService> logger)
         {
             _logger = logger;
 

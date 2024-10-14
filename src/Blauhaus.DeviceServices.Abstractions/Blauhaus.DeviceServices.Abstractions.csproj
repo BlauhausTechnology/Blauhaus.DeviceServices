@@ -10,12 +10,14 @@
    
 
   <ItemGroup>
-    <PackageReference Include="Blauhaus.Analytics.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="2.4.3" />
+    <PackageReference Include="Blauhaus.Common.ValueObjects" Version="2.4.4" />
+    <PackageReference Include="Blauhaus.Responses" Version="0.4.11" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
   </ItemGroup>
    
 
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="Share\" />
   </ItemGroup>
 
